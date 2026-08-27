@@ -1,9 +1,686 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Muhammed Ayaz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Muhammed Ayaz | Lead iOS Developer</title>
+
+    <meta name="description"
+          content="Muhammed Ayaz — Lead iOS Developer specializing in Swift, SwiftUI, UIKit and scalable mobile architecture.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            background: #070812;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b7b8c7;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #7c3aed;
+            filter: blur(180px);
+            opacity: 0.18;
+            right: 5%;
+            top: 100px;
+        }
+
+        .hero-content {
+            max-width: 760px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(168,85,247,0.5);
+            border-radius: 30px;
+            color: #c084fc;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 1.05;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            color: #aeb0c0;
+            font-size: 19px;
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        /* SKILLS */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .skill {
+            padding: 9px 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 13px;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #ddd;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            letter-spacing: -1.5px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: #999bab;
+            max-width: 650px;
+            margin-bottom: 45px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: #10111d;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 28px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(139,92,246,0.5);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(139,92,246,0.15);
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #999bab;
+            font-size: 15px;
+        }
+
+        /* ABOUT */
+
+        .about {
+            background: #0b0c15;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-box {
+            background: #11121f;
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat {
+            padding: 22px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 15px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 3px;
+        }
+
+        .stat span {
+            color: #999bab;
+            font-size: 14px;
+        }
+
+        /* BLOG */
+
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .blog-label {
+            color: #a78bfa;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .blog-card a {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #999bab;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #777989;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>My Website is Coming Soon</h1>
+
+<div class="container">
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="#" class="logo">MA<span>.</span></a>
+
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="nav-button">Get In Touch</a>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                LEAD iOS DEVELOPER
+            </div>
+
+            <h1>
+                Building exceptional
+                <span>iOS experiences.</span>
+            </h1>
+
+            <p class="hero-description">
+                I design and build scalable, maintainable and
+                high-performance iOS applications using Swift,
+                SwiftUI and modern architecture.
+            </p>
+
+            <div class="skills">
+                <div class="skill">Swift</div>
+                <div class="skill">SwiftUI</div>
+                <div class="skill">UIKit</div>
+                <div class="skill">MVVM</div>
+                <div class="skill">Clean Architecture</div>
+            </div>
+
+            <div class="buttons">
+                <a href="#projects" class="btn btn-primary">
+                    View Projects →
+                </a>
+
+                <a href="#blog" class="btn btn-secondary">
+                    Read Blog
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <h2 class="section-title">
+            What I Build
+        </h2>
+
+        <p class="section-description">
+            I focus on building reliable and scalable mobile
+            experiences with clean architecture and modern
+            Apple technologies.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">📱</div>
+
+                <h3>iOS Applications</h3>
+
+                <p>
+                    Native iOS applications built with Swift,
+                    UIKit and SwiftUI.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🏗️</div>
+
+                <h3>Scalable Architecture</h3>
+
+                <p>
+                    Clean and maintainable architecture for
+                    large-scale applications.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">⚡</div>
+
+                <h3>Performance</h3>
+
+                <p>
+                    Optimizing application performance,
+                    memory usage and user experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about" class="about">
+
+        <div class="about-grid">
+
+            <div>
+
+                <div class="tag">
+                    ABOUT ME
+                </div>
+
+                <h2 class="section-title">
+                    Crafting apps,
+                    solving problems.
+                </h2>
+
+                <p class="section-description">
+                    I'm Muhammed Ayaz, a Lead iOS Developer
+                    passionate about building high-quality
+                    mobile applications and solving complex
+                    engineering problems.
+                </p>
+
+                <a href="#contact" class="btn btn-primary">
+                    Let's Connect →
+                </a>
+
+            </div>
+
+
+            <div class="about-box">
+
+                <h3>My Experience</h3>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <strong>5+</strong>
+                        <span>Years Experience</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>20+</strong>
+                        <span>Projects</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>iOS</strong>
+                        <span>Specialization</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>Swift</strong>
+                        <span>Primary Language</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BLOG -->
+
+    <section id="blog">
+
+        <div class="tag">
+            TECHNICAL BLOG
+        </div>
+
+        <h2 class="section-title">
+            Things I've learned.
+        </h2>
+
+        <p class="section-description">
+            Practical articles about Swift, SwiftUI,
+            architecture, performance and real-world
+            iOS development.
+        </p>
+
+        <div class="cards">
+
+            <article class="card blog-card">
+
+                <div class="blog-label">
+                    Swift
+                </div>
+
+                <h3>
+                    Swift Concurrency in Production
+                </h3>
+
+                <p>
+                    Understanding async/await, Tasks and
+                    Actors with practical examples.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+
+            <article class="card blog-card">
+
+                <div class="blog-label">
+                    Architecture
+                </div>
+
+                <h3>
+                    Designing Scalable iOS Architecture
+                </h3>
+
+                <p>
+                    How to structure large iOS applications
+                    for maintainability and growth.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+
+            <article class="card blog-card">
+
+                <div class="blog-label">
+                    Performance
+                </div>
+
+                <h3>
+                    iOS Performance Optimization
+                </h3>
+
+                <p>
+                    Practical techniques for improving
+                    application performance.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact" class="contact">
+
+        <div class="tag">
+            GET IN TOUCH
+        </div>
+
+        <h2 class="section-title">
+            Let's build something great.
+        </h2>
+
+        <p>
+            Interested in working together or discussing
+            iOS development? Feel free to get in touch.
+        </p>
+
+        <a href="mailto:YOUR_EMAIL@gmail.com"
+           class="btn btn-primary">
+            Contact Me →
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 Muhammed Ayaz. All rights reserved.
+    </footer>
+
+</div>
+
 </body>
 </html>
