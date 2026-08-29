@@ -1,17 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UIKit Development: Lessons From Production | Muhammed Ayaz</title><meta name="description" content="Practical UIKit lessons from building and maintaining production iOS applications."><style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.75;margin:0;background:#070812;color:#f5f5f7}main{max-width:900px;margin:auto;padding:50px 22px}a{color:#a78bfa;text-decoration:none}.card{padding:22px;margin:24px 0;border:1px solid #292a38;border-radius:16px;background:#10111d}.quote{font-size:22px;border-left:3px solid #a78bfa;padding:16px 20px;margin:25px 0}button{position:fixed;right:20px;padding:10px 14px;border:1px solid #444;border-radius:12px;background:#161724;color:white;cursor:pointer}#top{bottom:70px}#bottom{bottom:20px}@media(max-width:600px){button{right:12px}}</style></head>
-<body><main><a href="index.html#blog">← Back to Blog</a><p>iOS • UIKit • Production</p><h1>UIKit Development: Lessons From Production</h1><p>UIKit is easy to learn. Building a UIKit application that survives years of production is a different skill.</p><div class="quote">The hardest UIKit problems usually start long before the crash, the warning, or the slow screen.</div>
-<div class="card"><h2>UIKit Is Still Relevant</h2><p>UIKit remains important for mature applications, custom interfaces, system integrations, and teams that need incremental rather than disruptive change. Production development is rarely about choosing one framework and replacing everything else.</p></div>
-<div class="card"><h2>View Controller Lifecycle</h2><p>Use each lifecycle method for the work it actually represents. Keep setup in <code>viewDidLoad</code>, refresh work that belongs to appearance in <code>viewWillAppear</code>, and avoid repeating expensive work every time a screen becomes visible.</p></div>
-<div class="card"><h2>Avoid Massive View Controllers</h2><p>A ViewController should coordinate the screen, not own networking, persistence, business rules, formatting, navigation and every piece of state. Moving responsibilities into focused types makes changes easier to reason about.</p></div>
-<div class="card"><h2>Table Views and Collection Views</h2><p>Reuse cells correctly, keep configuration predictable, avoid expensive work during scrolling, and use prefetching when it actually helps. A smooth list is the result of controlling repeated work.</p></div>
-<div class="card"><h2>Auto Layout in Real Applications</h2><p>Constraints should describe the interface rather than patch it. Dynamic content, self-sizing cells, localization and different device sizes expose assumptions that may remain invisible during initial development.</p></div>
-<div class="card"><h2>Main Thread and UI Work</h2><p>UI updates belong on the main actor, but expensive computation, file access, image processing and data work should not block the user interface. Swift Concurrency can make these boundaries clearer.</p></div>
-<div class="card"><h2>Networking and Screen Design</h2><p>Keep API communication out of large ViewControllers. Model loading, success, empty and error states explicitly so the screen is responsible for presentation rather than transport details.</p></div>
-<div class="card"><h2>Navigation</h2><p>Navigation becomes difficult when every screen decides where the application should go next. Coordinators or another clear navigation boundary can reduce that coupling, especially in larger flows.</p></div>
-<div class="card"><h2>Memory Management</h2><p>Reference cycles often appear through closures, delegates and long-lived objects. Understand ownership instead of adding <code>weak</code> everywhere. Memory management is about lifetime, not keywords.</p></div>
-<div class="card"><h2>UIKit and SwiftUI Together</h2><p>Production migration does not have to mean a rewrite. <code>UIHostingController</code>, <code>UIViewRepresentable</code> and <code>UIViewControllerRepresentable</code> allow teams to introduce SwiftUI where it provides value while keeping stable UIKit areas intact.</p></div>
-<div class="card"><h2>Performance</h2><p>Profile before changing architecture or optimizing code. Scrolling, layout, image decoding, rendering and main-thread work should be measured on realistic devices and workloads.</p><p>For a deeper performance guide, see <a href="ios-performance.html">Improving iOS App Performance →</a></p></div>
-<div class="card"><h2>Production Mistakes I Would Avoid Today</h2><ul><li>Massive ViewControllers</li><li>Too much shared mutable state</li><li>NotificationCenter used as a default communication system</li><li>Force unwraps without a justified invariant</li><li>Hard-coded layout assumptions</li><li>Synchronous work on the UI path</li><li>Abstractions created before the problem exists</li></ul></div>
-<div class="card"><h2>Final Production Checklist</h2><p>Keep responsibilities clear. Measure performance. Treat memory ownership seriously. Design loading and failure states. Test different devices and content sizes. Prefer incremental change over unnecessary rewrites.</p></div><p><a href="swift-concurrency.html">Swift Concurrency in Production →</a></p><p><a href="designing-scalable-ios-architecture.html">Designing Scalable iOS Architecture →</a></p><p><a href="index.html#blog">← Back to Blog</a></p></main><button id="top" onclick="scrollTo({top:0,behavior:'smooth'})">↑ Top</button><button id="bottom" onclick="scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">↓ Bottom</button><script>const t=document.getElementById('top'),b=document.getElementById('bottom');function update(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;t.style.display=y<40?'none':'block';b.style.display=y>max-40?'none':'block'}addEventListener('scroll',update);update();</script></body></html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UIKit Development: Lessons From Production | Muhammed Ayaz</title>
+	<meta name="description" content="Practical UIKit lessons from building and maintaining production iOS applications.">
+	<style>
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		html { scroll-behavior: smooth; }
+		body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #070812; color: #f7f7fb; line-height: 1.75; transition: .35s; }
+		a { color: inherit; text-decoration: none; }
+		.wrap { width: min(1120px, 92%); margin: auto; }
+		nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.08); }
+		.logo { font-size: 23px; font-weight: 800; }
+		.logo span { color: #a78bfa; }
+		.nav-tools { display: flex; align-items: flex-end; gap: 14px; }
+		.nav-back { font-size: 14px; color: #aeb0c0; margin-bottom: 10px; }
+		.theme-area { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+		.theme-hint { font-size: 11px; line-height: 1.15; color: #9fa3b5; white-space: nowrap; }
+		.theme-toggle { width: 118px; height: 48px; border-radius: 16px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color: #fff; display: flex; align-items: center; gap: 7px; padding: 4px 7px; cursor: pointer; transition: .35s; }
+		.theme-icon { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.12); font-size: 19px; }
+		.theme-label { font-size: 12px; font-weight: 700; min-width: 55px; text-align: center; }
+		.hero { padding: 90px 0 55px; position: relative; overflow: hidden; }
+		.hero:before { content: ""; position: absolute; width: 520px; height: 520px; right: 2%; top: 10px; background: #7c3aed; filter: blur(190px); opacity: .16; }
+		.eyebrow { display: inline-block; padding: 7px 13px; border: 1px solid rgba(168,85,247,.45); border-radius: 30px; color: #c4b5fd; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+		.hero h1 { font-size: clamp(44px, 6.7vw, 78px); line-height: 1.05; letter-spacing: -3px; max-width: 930px; margin: 22px 0; }
+		.hero h1 span { background: linear-gradient(90deg,#8b5cf6,#ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+		.hero p { color: #aeb0c0; max-width: 820px; font-size: 18px; }
+		.meta { display: flex; gap: 12px; flex-wrap: wrap; color: #85899b; font-size: 13px; margin-top: 24px; }
+		.layout { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 52px; align-items: start; padding: 55px 0 100px; }
+		.toc { position: sticky; top: 24px; padding: 22px; background: #0e0f1a; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; }
+		.toc strong { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+		.toc a { display: block; color: #9295a8; font-size: 13px; padding: 8px 0; }
+		.article h2 { font-size: 32px; line-height: 1.2; letter-spacing: -1px; margin: 62px 0 15px; }
+		.article p { color: #c0c2cd; margin: 0 0 18px; }
+		.article ul { padding-left: 22px; color: #c0c2cd; margin: 0 0 20px; }
+		.article li { margin: 7px 0; }
+		.quote { border-left: 3px solid #a78bfa; background: #0f1020; padding: 20px 22px; margin: 28px 0; border-radius: 0 16px 16px 0; color: #eef0f7; font-size: 20px; }
+		.callout { background: linear-gradient(135deg,rgba(99,102,241,.14),rgba(168,85,247,.08)); border: 1px solid rgba(139,92,246,.24); border-radius: 18px; padding: 24px; margin: 28px 0; }
+		.callout strong { font-size: 22px; }
+		.link-card { display: block; background: #10111d; border: 1px solid rgba(139,92,246,.3); border-radius: 18px; padding: 24px; margin: 25px 0; transition: .3s; }
+		.link-card:hover { transform: translateY(-3px); border-color: rgba(167,139,250,.7); }
+		.link-card .small { font-size: 12px; color: #a78bfa; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+		.link-card h3 { margin: 7px 0; font-size: 22px; }
+		.footer { border-top: 1px solid rgba(255,255,255,.08); padding: 35px 0; color: #7f8292; text-align: center; }
+		body.light { background: #f7f8fc; color: #111827; }
+		body.light nav { border-bottom-color: rgba(17,24,39,.10); }
+		body.light .nav-back, body.light .meta, body.light .theme-hint { color: #667085; }
+		body.light .theme-toggle { background: #fff; border-color: rgba(17,24,39,.13); color: #111827; }
+		body.light .theme-icon { background: #f1f2f6; }
+		body.light .hero:before { opacity: .08; }
+		body.light .hero p, body.light .article p, body.light .article ul { color: #5f6678; }
+		body.light .toc { background: #fff; border-color: rgba(17,24,39,.09); box-shadow: 0 10px 35px rgba(17,24,39,.05); }
+		body.light .toc a { color: #606a7d; }
+		body.light .quote { background: #f3f1ff; color: #374151; }
+		body.light .link-card { background: #fff; }
+		body.light .footer { border-top-color: rgba(17,24,39,.10); }
+		@media (max-width: 850px) {
+			.layout { grid-template-columns: 1fr; }
+			.toc { position: relative; top: 0; }
+			.hero { padding-top: 65px; }
+			.hero h1 { letter-spacing: -2px; }
+			.article h2 { font-size: 28px; }
+			.nav-tools { gap: 9px; }
+			.nav-back { margin-bottom: 8px; }
+			.theme-toggle { width: 108px; }
+			.theme-hint { font-size: 10px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<nav>
+			<a href="index.html" class="logo">MA<span>.</span></a>
+			<div class="nav-tools">
+				<div class="theme-area">
+					<div class="theme-hint" id="themeHint">Classic if Dark Theme</div>
+					<button class="theme-toggle" id="themeToggle" type="button">
+						<span class="theme-icon" id="themeIcon">☀️</span>
+						<span class="theme-label" id="themeLabel">Dark</span>
+					</button>
+				</div>
+				<a href="index.html#blog" class="nav-back">← Back to Blog</a>
+			</div>
+		</nav>
+
+		<header class="hero">
+			<div class="eyebrow">UIKIT • iOS • PRODUCTION</div>
+			<h1>UIKit Development: <span>Lessons From Production.</span></h1>
+			<p>UIKit is easy to learn. Building a UIKit application that survives years of production is a different skill.</p>
+			<div class="meta"><span>Technical Article</span><span>•</span><span>iOS / UIKit</span><span>•</span><span>Production-focused</span></div>
+		</header>
+
+		<div class="layout">
+			<aside class="toc">
+				<strong>On this page</strong>
+				<a href="#relevant">UIKit is still relevant</a>
+				<a href="#lifecycle">View controller lifecycle</a>
+				<a href="#massive">Avoiding massive view controllers</a>
+				<a href="#lists">Tables & collections</a>
+				<a href="#layout">Auto Layout</a>
+				<a href="#thread">Main thread & UI</a>
+				<a href="#networking">Networking</a>
+				<a href="#navigation">Navigation</a>
+				<a href="#memory">Memory management</a>
+				<a href="#swiftui">UIKit + SwiftUI</a>
+				<a href="#performance">Performance</a>
+				<a href="#mistakes">Production mistakes</a>
+			</aside>
+
+			<main class="article">
+				<section id="relevant">
+					<div class="callout"><strong>UIKit is easy to start. Production UIKit is where the real engineering begins.</strong></div>
+					<p>UIKit remains important for mature applications, custom interfaces, system integrations, and teams that need incremental rather than disruptive change. Production development is rarely about choosing one framework and replacing everything else.</p>
+					<p>The lessons that matter most usually appear after an application has users, multiple releases, changing requirements, and code that has to remain understandable.</p>
+				</section>
+
+				<section id="lifecycle">
+					<h2>1. View Controller Lifecycle</h2>
+					<p>Each lifecycle method has a purpose. Keep initial view setup in <code>viewDidLoad</code>, refresh work that belongs to appearance in <code>viewWillAppear</code>, and avoid repeating expensive work every time a screen becomes visible.</p>
+					<p>A common production mistake is treating lifecycle callbacks as interchangeable places to put code. They are not. The right question is whether the work belongs to loading, appearing, disappearing, or final teardown.</p>
+				</section>
+
+				<section id="massive">
+					<h2>2. Avoiding Massive View Controllers</h2>
+					<p>A ViewController should coordinate the screen, not own networking, persistence, business rules, formatting, navigation, and every piece of state.</p>
+					<p>Moving responsibilities into focused types makes changes easier to reason about. It also gives tests a smaller surface and makes future migration to other UI technologies less painful.</p>
+				</section>
+
+				<section id="lists">
+					<h2>3. Table Views and Collection Views</h2>
+					<p>Reuse cells correctly, keep configuration predictable, avoid expensive work during scrolling, and use prefetching when it actually helps.</p>
+					<ul>
+						<li>Keep cell configuration lightweight.</li>
+						<li>Prepare expensive data before it reaches the scrolling path.</li>
+						<li>Handle image loading and cancellation carefully.</li>
+						<li>Use stable item identity.</li>
+						<li>Profile scrolling on real devices.</li>
+					</ul>
+				</section>
+
+				<section id="layout">
+					<h2>4. Auto Layout in Real Applications</h2>
+					<p>Constraints should describe the interface rather than patch it. Dynamic content, self-sizing cells, localization, accessibility text sizes, and different device sizes expose assumptions that may remain invisible during initial development.</p>
+					<div class="quote">A constraint warning is not just a console message. It is evidence that the layout has an unclear rule.</div>
+				</section>
+
+				<section id="thread">
+					<h2>5. Main Thread and UI Work</h2>
+					<p>UI updates belong on the main actor, but expensive computation, file access, image processing, and data work should not block the user interface.</p>
+					<p>Swift Concurrency can make these boundaries clearer, but the principle is older than async/await: keep the UI responsive by keeping expensive work away from the UI path.</p>
+					<a class="link-card" href="swift-concurrency.html">
+						<div class="small">Related reading</div>
+						<h3>Swift Concurrency in Production</h3>
+						<p>Threads, GCD, OperationQueue, async/await, Tasks, actors, MainActor and synchronization.</p>
+					</a>
+				</section>
+
+				<section id="networking">
+					<h2>6. Networking and Screen Design</h2>
+					<p>Keep API communication out of large ViewControllers. Model loading, success, empty, and error states explicitly so the screen is responsible for presentation rather than transport details.</p>
+					<p>Also think about cancellation. A request started for one screen state should not blindly update the UI after the user has moved somewhere else.</p>
+				</section>
+
+				<section id="navigation">
+					<h2>7. Navigation</h2>
+					<p>Navigation becomes difficult when every screen decides where the application should go next. Coordinators or another clear navigation boundary can reduce that coupling, especially in larger flows.</p>
+					<p>Deep links, authentication flows, tabs, modal presentation, and state restoration become easier when navigation decisions have one understandable home.</p>
+				</section>
+
+				<section id="memory">
+					<h2>8. Memory Management</h2>
+					<p>Reference cycles often appear through closures, delegates, and long-lived objects. Understand ownership instead of adding <code>weak</code> everywhere.</p>
+					<p>Memory management is about lifetime. A weak reference is a tool for expressing ownership, not a universal fix for every object relationship.</p>
+				</section>
+
+				<section id="swiftui">
+					<h2>9. UIKit and SwiftUI Together</h2>
+					<p>Production migration does not have to mean a rewrite. <code>UIHostingController</code>, <code>UIViewRepresentable</code>, and <code>UIViewControllerRepresentable</code> allow teams to introduce SwiftUI where it provides value while keeping stable UIKit areas intact.</p>
+					<p>The best migration is usually the one that reduces risk while delivering value, not the one that produces the largest rewrite.</p>
+				</section>
+
+				<section id="performance">
+					<h2>10. Performance</h2>
+					<p>Profile before changing architecture or optimizing code. Scrolling, layout, image decoding, rendering, startup, and main-thread work should be measured on realistic devices and workloads.</p>
+					<a class="link-card" href="ios-performance.html">
+						<div class="small">Related reading</div>
+						<h3>Improving iOS App Performance</h3>
+						<p>Measure first, find the bottleneck, make one focused change, and verify the result.</p>
+					</a>
+				</section>
+
+				<section id="mistakes">
+					<h2>11. Production Mistakes I Would Avoid Today</h2>
+					<ul>
+						<li>Massive ViewControllers.</li>
+						<li>Too much shared mutable state.</li>
+						<li>NotificationCenter used as a default communication system.</li>
+						<li>Force unwraps without a justified invariant.</li>
+						<li>Hard-coded layout assumptions.</li>
+						<li>Synchronous work on the UI path.</li>
+						<li>Abstractions created before the problem exists.</li>
+					</ul>
+					<div class="quote">The goal is not to write the most abstract UIKit code. The goal is to write code that remains easy to change when the product changes.</div>
+				</section>
+
+				<section>
+					<h2>12. Final Production Checklist</h2>
+					<p>Keep responsibilities clear. Measure performance. Treat memory ownership seriously. Design loading and failure states. Test different devices and content sizes. Prefer incremental change over unnecessary rewrites.</p>
+				</section>
+
+				<a class="link-card" href="designing-scalable-ios-architecture.html">
+					<div class="small">Continue reading</div>
+					<h3>Designing Scalable iOS Architecture</h3>
+					<p>Explore architecture decisions, boundaries, and patterns for growing iOS applications.</p>
+				</a>
+			</main>
+		</div>
+
+		<footer class="footer">© Muhammed Ayaz • iOS Development</footer>
+	</div>
+
+	<script>
+		(function () {
+			const body = document.body;
+			const toggle = document.getElementById("themeToggle");
+			const icon = document.getElementById("themeIcon");
+			const label = document.getElementById("themeLabel");
+			const hint = document.getElementById("themeHint");
+			const savedTheme = localStorage.getItem("theme");
+
+			function applyTheme(theme) {
+				const isLight = theme === "light";
+				body.classList.toggle("light", isLight);
+				icon.textContent = isLight ? "🌙" : "☀️";
+				label.textContent = isLight ? "Classic" : "Light";
+				hint.textContent = isLight ? "Classic if Dark Theme" : "Dark if White Theme";
+				localStorage.setItem("theme", theme);
+			}
+
+			applyTheme(savedTheme === "light" ? "light" : "dark");
+			toggle.addEventListener("click", function () {
+				applyTheme(body.classList.contains("light") ? "dark" : "light");
+			});
+		})();
+	</script>
+	<script src="scroll-controls.js"></script>
+</body>
+</html>
