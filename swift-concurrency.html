@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swift Concurrency in Production | Muhammed Ayaz</title>
+<meta name="description" content="Swift Concurrency in Production — from Threads and GCD to Tasks, Actors, MainActor, Sendable and AsyncSequence.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#070812;color:#f7f7fb;line-height:1.75}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}.logo{font-weight:800;font-size:23px}.logo span,.accent{color:#a78bfa}.nav-back{color:#aeb0c0;font-size:14px}.hero{padding:90px 0 55px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:520px;height:520px;right:2%;top:10px;background:#7c3aed;filter:blur(190px);opacity:.16}.eyebrow{display:inline-block;padding:7px 13px;border:1px solid rgba(168,85,247,.45);border-radius:30px;color:#c4b5fd;font-size:12px;font-weight:800;letter-spacing:1px}.hero h1{font-size:clamp(44px,6.7vw,78px);line-height:1.04;letter-spacing:-3px;max-width:950px;margin:22px 0 22px}.hero p{color:#aeb0c0;max-width:820px;font-size:18px}.meta{display:flex;gap:12px;flex-wrap:wrap;color:#85889a;font-size:13px;margin-top:26px}.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:52px;align-items:start;padding:55px 0 100px}.toc{position:sticky;top:24px;padding:22px;background:#0e0f1a;border:1px solid rgba(255,255,255,.08);border-radius:18px}.toc strong{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#fff}.toc a{display:block;color:#9295a8;font-size:13px;padding:8px 0;transition:.25s}.toc a:hover{color:#c4b5fd}.article{min-width:0}.article h2{font-size:32px;line-height:1.2;letter-spacing:-1px;margin:62px 0 15px}.article h3{font-size:22px;margin:28px 0 10px}.article p{color:#c0c2cd;margin:0 0 18px}.article ul{padding-left:22px;color:#c0c2cd;margin:0 0 20px}.article li{margin:7px 0}.lead{font-size:20px;color:#d7d8e1}.quote{border-left:3px solid #8b5cf6;background:#0f1020;padding:18px 20px;margin:25px 0;border-radius:0 14px 14px 0;color:#e5e7ef}.code{background:#0b0c14;border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:18px 20px;margin:20px 0;overflow:auto;color:#e6e7ee;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px;line-height:1.65}.diagram{background:#0d0f19;border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:23px;margin:24px 0;text-align:center;color:#d8d9e2}.diagram .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.pill{padding:10px 13px;border-radius:12px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);font-size:13px}.arrow{color:#a78bfa;padding:7px}.table-wrap{overflow:auto;margin:24px 0}.compare{width:100%;border-collapse:collapse;min-width:670px}.compare th,.compare td{border:1px solid rgba(255,255,255,.08);padding:13px 14px;text-align:left;vertical-align:top}.compare th{background:#10111d;color:#fff}.compare td{color:#bfc1cc}.callout{background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(168,85,247,.08));border:1px solid rgba(139,92,246,.22);border-radius:18px;padding:22px;margin:28px 0}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px 0}.check{padding:13px 15px;background:#10111d;border:1px solid rgba(255,255,255,.07);border-radius:13px;color:#c7c8d2}.footer{border-top:1px solid rgba(255,255,255,.08);padding:35px 0;color:#7f8292;text-align:center}.back{display:inline-block;margin-top:12px;color:#a78bfa;font-weight:700}@media(max-width:850px){.layout{grid-template-columns:1fr}.toc{position:relative;top:0}.hero{padding-top:65px}.hero h1{letter-spacing:-2px}.article h2{font-size:28px}.checklist{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="index.html" class="logo">MA<span>.</span></a><a href="index.html#blog" class="nav-back">← Back to Blog</a></nav>
+<header class="hero">
+<div class="eyebrow">SWIFT • CONCURRENCY • PRODUCTION</div>
+<h1>Swift Concurrency in Production: From Threads and GCD to Actors</h1>
+<p>Concurrency is not just about moving work to the background. It is about deciding who does the work, where it can run, how long it should live, what happens when it is cancelled, and who is allowed to touch shared state.</p>
+<div class="meta"><span>Technical Article</span><span>•</span><span>iOS / Swift</span><span>•</span><span>Production-focused</span></div>
+</header>
+<div class="layout">
+<aside class="toc"><strong>On this page</strong><a href="#problem">The real problem</a><a href="#evolution">The evolution</a><a href="#threads">Threads</a><a href="#gcd">GCD</a><a href="#operation">OperationQueue</a><a href="#callbacks">Completion handlers</a><a href="#async">async / await</a><a href="#tasks">Tasks</a><a href="#structured">Structured concurrency</a><a href="#actors">Actors</a><a href="#mainactor">MainActor</a><a href="#sendable">Sendable & Swift 6</a><a href="#streams">Continuations & AsyncSequence</a><a href="#sync">Locks & synchronization</a><a href="#production">Production example</a><a href="#decision">Decision guide</a></aside>
+<main class="article">
+<section id="problem"><p class="lead">A production iOS app rarely performs one piece of work at a time. A screen may be fetching data, decoding JSON, loading images, reading cache, handling input, and updating UI while the user keeps moving.</p><p>The difficult part is not making these things happen at the same time. The difficult part is making them happen <strong>correctly</strong>.</p><div class="quote">The important concurrency question is not “Which thread should run this?” It is “How should this work be scheduled, isolated, cancelled, and coordinated?”</div></section>
+<section id="evolution"><h2>1. The Evolution of Concurrency on Apple Platforms</h2><p>Swift Concurrency is the result of years of solving the same problems at different abstraction levels.</p><div class="diagram"><div class="row"><span class="pill">Threads</span><span class="arrow">→</span><span class="pill">OperationQueue</span><span class="arrow">→</span><span class="pill">GCD</span><span class="arrow">→</span><span class="pill">Callbacks</span></div><div class="row" style="margin-top:12px"><span class="pill">async / await</span><span class="arrow">→</span><span class="pill">Tasks</span><span class="arrow">→</span><span class="pill">Structured Concurrency</span><span class="arrow">→</span><span class="pill">Actors</span></div><div class="row" style="margin-top:12px"><span class="pill">MainActor</span><span class="arrow">+</span><span class="pill">Sendable</span><span class="arrow">+</span><span class="pill">AsyncSequence</span></div></div><p>Each step reduced a different kind of manual bookkeeping. Modern Swift does more of the reasoning in the language and compiler, but architecture still matters.</p></section>
+<section id="threads"><h2>2. Threads: The Lowest-Level Mental Model</h2><p>A thread is an operating-system execution path. Developers can create one directly:</p><pre class="code">Thread {
+    performHeavyWork()
+}.start()</pre><p>Threads are powerful, but application code usually does not need to manage thread creation and coordination directly. Too many manually managed threads can add memory overhead, scheduling complexity, synchronization problems, and difficult ownership rules.</p><div class="diagram"><div class="row"><span class="pill">Thread</span><span class="arrow">→</span><span class="pill">Execution</span></div></div></section>
+<section id="gcd"><h2>3. Grand Central Dispatch</h2><p>GCD shifted the developer mindset from creating threads to submitting work to queues.</p><pre class="code">DispatchQueue.global().async {
+    let result = performWork()
+
+    DispatchQueue.main.async {
+        updateUI(result)
+    }
+}</pre><h3>Serial vs concurrent queues</h3><p>A serial queue executes one submitted block at a time. A concurrent queue can make progress on multiple submitted blocks. The important distinction is that <strong>queue</strong> and <strong>thread</strong> are not the same thing.</p><h3>Important GCD primitives</h3><ul><li><code>DispatchQueue</code> for scheduling.</li><li><code>DispatchGroup</code> for coordinating related work.</li><li><code>DispatchWorkItem</code> for representing a unit of dispatch work.</li><li><code>DispatchSemaphore</code> for limiting access to a resource.</li><li><code>DispatchSource</code> for certain event-driven system work.</li><li>QoS classes to express relative work importance.</li></ul><h3><code>sync</code> vs <code>async</code></h3><p><code>async</code> submits work and lets the caller continue. <code>sync</code> waits for the block to finish. That difference becomes critical when synchronization is involved, and incorrect synchronous dispatch can create deadlocks.</p></section>
+<section id="operation"><h2>4. OperationQueue</h2><p><code>OperationQueue</code> provides a higher-level model around units of work. One of its strengths is explicit dependency management.</p><div class="diagram"><div class="row"><span class="pill">Download User</span><span class="arrow">→</span><span class="pill">Process User</span><span class="arrow">→</span><span class="pill">Save User</span></div></div><p>When work has dependencies, cancellation, or operation-level state, the abstraction can be useful even in modern codebases.</p></section>
+<section id="callbacks"><h2>5. Completion Handlers</h2><p>Legacy asynchronous APIs often used nested completion handlers.</p><pre class="code">fetchUser { user in
+    fetchPosts(for: user) { posts in
+        fetchImages(for: posts) { images in
+            updateUI(images)
+        }
+    }
+}</pre><p>Completion handlers are valid, but large workflows can become difficult to read, test, cancel, and reason about. Error propagation and ownership become especially noisy.</p></section>
+<section id="async"><h2>6. async / await</h2><p>Swift lets asynchronous work look much closer to ordinary control flow.</p><pre class="code">func fetchUser() async throws -> User {
+    ...
+}
+
+let user = try await fetchUser()</pre><div class="callout"><strong>Important:</strong> <code>await</code> does not mean “create a background thread.” An asynchronous operation may suspend the current task, allowing the underlying execution resource to be used for other work.</div><div class="diagram"><div class="row"><span class="pill">Task</span><span class="arrow">→</span><span class="pill">await</span><span class="arrow">→</span><span class="pill">suspend</span><span class="arrow">→</span><span class="pill">resume</span></div></div></section>
+<section id="tasks"><h2>7. Tasks</h2><p>A <code>Task</code> represents asynchronous work.</p><pre class="code">Task {
+    let user = try await fetchUser()
+    print(user)
+}</pre><p>A task has a lifetime, priority, cancellation state, and execution context. That means the production question is not simply “Can I create a task?” but “Who owns this task, and when should its work stop?”</p><h3>Cancellation</h3><pre class="code">if Task.isCancelled {
+    return
+}
+
+try Task.checkCancellation()</pre><p>Swift cancellation is cooperative. Marking a task cancelled does not automatically terminate every operation inside it. Your code and APIs need to cooperate with the cancellation model.</p></section>
+<section id="structured"><h2>8. Structured Concurrency</h2><p>Structured concurrency gives asynchronous work a clearer relationship and lifetime.</p><div class="diagram"><div class="row"><span class="pill">Parent Task</span></div><div class="row" style="margin-top:12px"><span class="pill">Child A</span><span class="pill">Child B</span><span class="pill">Child C</span></div></div><p>When child work belongs to a parent operation, structured relationships make cancellation and error propagation easier to reason about.</p><h3>Task groups</h3><pre class="code">await withTaskGroup(of: Result.self) { group in
+    group.addTask { await fetchProfile() }
+    group.addTask { await fetchPosts() }
+    group.addTask { await fetchNotifications() }
+}</pre><p>The key is dependency, not fashion. Independent work may run concurrently; dependent work often should remain sequential.</p></section>
+<section id="actors"><h2>9. Actors and Shared Mutable State</h2><p>Concurrency becomes harder when several tasks can access the same mutable state.</p><pre class="code">actor ImageCache {
+    private var storage: [URL: Data] = [:]
+
+    func insert(_ data: Data, for url: URL) {
+        storage[url] = data
+    }
+
+    func image(for url: URL) -> Data? {
+        storage[url]
+    }
+}</pre><p>An actor protects its isolated state. The larger architectural idea is powerful: instead of forcing every caller to synchronize access to shared state, make ownership and isolation explicit.</p><h3>Actor reentrancy</h3><p>Actors are not “one giant transaction.” When an actor-isolated method reaches an <code>await</code>, the actor can make progress on other work. State read before an await may have changed when execution resumes.</p></section>
+<section id="mainactor"><h2>10. MainActor and UI Isolation</h2><p>UI state naturally belongs to the main actor.</p><pre class="code">@MainActor
+final class ProfileViewModel {
+    var name = ""
+
+    func updateName(_ name: String) {
+        self.name = name
+    }
+}</pre><p><code>@MainActor</code> is not a synonym for “put all work on the main thread.” It is an isolation boundary for state that needs main-actor access. Expensive work should still be designed so that it does not unnecessarily execute in the UI context.</p><pre class="code">let result = await fetchData()
+
+await MainActor.run {
+    updateUI(with: result)
+}</pre></section>
+<section id="sendable"><h2>11. Sendable, @Sendable, and Swift 6</h2><p>Modern Swift also asks whether values can safely cross concurrency boundaries.</p><p><code>Sendable</code> expresses that a type is intended to be safe to transfer between concurrency domains. <code>@Sendable</code> applies the same idea to closures.</p><p>This becomes especially important with Swift 6 strict concurrency checking, where issues involving actor isolation, non-Sendable reference types, mutable shared state, and concurrency boundaries become more visible at compile time.</p><div class="quote">The compiler is no longer just checking syntax. It is helping enforce the concurrency design.</div></section>
+<section id="streams"><h2>12. Continuations and AsyncSequence</h2><h3>Continuations</h3><p>Continuations let modern async code wrap older callback-based APIs.</p><pre class="code">func loadUser() async throws -> User {
+    try await withCheckedThrowingContinuation { continuation in
+        legacyLoadUser { result in
+            continuation.resume(with: result)
+        }
+    }
+}</pre><h3>AsyncSequence</h3><p>Some asynchronous work produces a stream rather than a single value.</p><pre class="code">for await event in events {
+    handle(event)
+}</pre><p>This is a natural model for notifications, live updates, WebSocket-style events, location updates, and other ongoing asynchronous sequences.</p></section>
+<section id="sync"><h2>13. Locks, Mutexes, Semaphores and Deadlocks</h2><p>Actors are not the only synchronization tools. Lower-level systems still use locks, mutexes, semaphores, atomics, and related primitives.</p><div class="diagram"><div class="row"><span class="pill">Shared State</span><span class="arrow">→</span><span class="pill">Lock / Mutex</span><span class="arrow">→</span><span class="pill">Critical Section</span></div></div><p>These tools can be appropriate in low-level or highly controlled components, but they introduce their own failure modes.</p><h3>Race conditions</h3><p>A race condition occurs when the final result depends on the timing of concurrent access to shared state.</p><h3>Deadlocks</h3><p>A deadlock occurs when work waits in a cycle and none of the participants can progress. Synchronous dispatch onto the wrong serial queue is a classic example.</p><h3>Semaphores</h3><p>A semaphore can limit how many operations access a resource at once. That can be useful, but semaphores can also reintroduce blocking and synchronization complexity, so they should be used deliberately.</p></section>
+<section id="production"><h2>14. A Production Example: Photo Feed</h2><p>Imagine a profile screen that needs to load a user, posts, followers, recommendations, and images.</p><div class="diagram"><div class="row"><span class="pill">Profile Screen</span><span class="arrow">→</span><span class="pill">ViewModel</span><span class="arrow">→</span><span class="pill">Services</span></div><div class="row" style="margin-top:12px"><span class="pill">async / await</span><span class="pill">TaskGroup</span><span class="pill">Actor Cache</span><span class="pill">MainActor</span></div></div><p>A sensible design could use a main-actor-isolated ViewModel, asynchronous service APIs, a task group for independent requests, and an actor for shared image-cache state. When the screen is no longer relevant, associated work can be cancelled.</p><h3>Sequential work</h3><pre class="code">API A → API B → API C</pre><p>Use this when the next operation genuinely depends on the previous result.</p><h3>Concurrent work</h3><pre class="code">        ┌→ API A
+Task ───┼→ API B
+        └→ API C</pre><p>Use this when the operations are genuinely independent and the added concurrency is worth the complexity and resource cost.</p></section>
+<section id="decision"><h2>15. Which Concurrency Tool Should You Use?</h2><div class="table-wrap"><table class="compare"><thead><tr><th>Tool</th><th>Primary purpose</th><th>Think about</th></tr></thead><tbody><tr><td>Thread</td><td>Low-level execution control</td><td>Do you truly need thread-level control?</td></tr><tr><td>GCD</td><td>Queue-based scheduling</td><td>Explicit queue or dispatch semantics</td></tr><tr><td>OperationQueue</td><td>Operation management</td><td>Dependencies and operation lifecycle</td></tr><tr><td>Lock / Mutex</td><td>Protect shared state</td><td>Critical sections and deadlock risk</td></tr><tr><td>async / await</td><td>Express asynchronous workflows</td><td>Clear, readable async control flow</td></tr><tr><td>Task</td><td>Unit of asynchronous work</td><td>Ownership, priority, cancellation</td></tr><tr><td>TaskGroup</td><td>Related child tasks</td><td>Independent work with a shared lifetime</td></tr><tr><td>Actor</td><td>Isolate mutable state</td><td>Shared state and actor reentrancy</td></tr><tr><td>MainActor</td><td>UI/main-actor isolation</td><td>UI state, not arbitrary heavy work</td></tr><tr><td>Continuation</td><td>Bridge callback APIs</td><td>Correctly resuming exactly once</td></tr><tr><td>AsyncSequence</td><td>Asynchronous streams</td><td>Events, streams, and lifecycle</td></tr><tr><td>Sendable</td><td>Concurrency-safe value transfer</td><td>What crosses an isolation boundary?</td></tr></tbody></table></div><h2>16. The Production Questions That Matter</h2><div class="checklist"><div class="check">✓ Who owns this work?</div><div class="check">✓ What happens when the user leaves?</div><div class="check">✓ Can this work actually run concurrently?</div><div class="check">✓ Is there shared mutable state?</div><div class="check">✓ Which isolation domain owns the result?</div><div class="check">✓ What happens when the task is cancelled?</div><div class="check">✓ Can stale work overwrite newer state?</div><div class="check">✓ Do I need a thread, queue, task, or actor?</div></div><h2>17. Final Takeaway</h2><p>Swift Concurrency is not simply a replacement for GCD. It is a broader programming model for expressing asynchronous work, its lifetime, its relationships, its cancellation, and the ownership of mutable state.</p><p>The real progression is not “old API versus new API.” It is a progression toward making concurrency relationships easier to express and safer to reason about.</p><div class="callout"><strong>The goal is not to make more things run at the same time.</strong><br>It is to make asynchronous work behave correctly when many things are happening at once.</div></section>
+</main></div>
+<div class="footer">© Muhammed Ayaz • iOS Development & Swift Engineering<br><a class="back" href="index.html">← Back to portfolio</a></div>
+</div>
+</body>
+</html>
