@@ -53,5 +53,6 @@ const body=document.body,btn=document.getElementById('themeToggle'),icon=documen
 function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Classic if Dark Theme';btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem('portfolioTheme',theme)}
 applyTheme(localStorage.getItem('portfolioTheme')||'dark');btn.addEventListener('click',()=>applyTheme(body.classList.contains('light')?'dark':'light'));
 </script>
+    <script src="scroll-controls.js"></script>
 </body>
 </html>
