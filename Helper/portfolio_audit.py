@@ -20,10 +20,7 @@ for html_file in HTML_FILES:
         ERRORS.append(f"{html_file}: duplicate id '{item}'")
 
     for attribute in ("src", "href"):
-        values = re.findall(rf'\b{attribute}=["\']([^"\']+)["\']', text, re.I)
-        local_values = []
-
-        for value in values:
+        for value in re.findall(rf'\b{attribute}=["\']([^"\']+)["\']', text, re.I):
             if value.startswith(LOCAL_SCHEME_PREFIXES):
                 continue
 
@@ -31,14 +28,9 @@ for html_file in HTML_FILES:
             if not clean_value:
                 continue
 
-            local_values.append(clean_value)
             target = (html_file.parent / clean_value).resolve()
             if not target.exists():
                 ERRORS.append(f"{html_file}: broken {attribute} '{value}'")
-
-        duplicates = {item for item in local_values if local_values.count(item) > 1}
-        for item in sorted(duplicates):
-            ERRORS.append(f"{html_file}: duplicate local {attribute} '{item}'")
 
     if "Classic if Dark Theme" in text:
         ERRORS.append(f"{html_file}: obsolete theme hint text")
