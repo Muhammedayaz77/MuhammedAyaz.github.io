@@ -3,12 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>iOS Interview Questions &amp; Answers | Muhammed Ayaz</title>
-	<meta name="description" content="Practical iOS interview questions and answers for experienced developers.">
+	<title>100 iOS Interview Questions &amp; Answers | Muhammed Ayaz</title>
+	<meta name="description" content="100 practical iOS interview questions and answers for experienced developers.">
 	<style>
 		* { box-sizing: border-box; margin: 0; padding: 0; }
 		html { scroll-behavior: smooth; }
-		body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #070812; color: #f7f7fb; line-height: 1.75; transition: background-color .35s ease, color .35s ease; }
+		body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #070812; color: #f7f7fb; line-height: 1.75; transition: .35s; }
 		a { color: inherit; text-decoration: none; }
 		.wrap { width: min(1120px, 92%); margin: auto; }
 		nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.08); }
@@ -62,24 +62,24 @@
 <body>
 	<div class="wrap">
 		<nav>
-			<a href="../home.html" class="logo">MA<span>.</span></a>
+			<a href="index.html" class="logo">MA<span>.</span></a>
 			<div class="nav-tools">
 				<div class="theme-area">
 					<div class="theme-hint" id="themeHint">Classic if Dark Theme</div>
-					<button class="theme-toggle" id="themeToggle" type="button" aria-label="Change theme" title="Switch theme">
+					<button class="theme-toggle" id="themeToggle" type="button" aria-label="Change theme">
 						<span class="theme-icon" id="themeIcon">☀️</span>
-						<span class="theme-label" id="themeLabel">Dark</span>
+						<span class="theme-label" id="themeLabel">Light</span>
 					</button>
 				</div>
-				<a href="../home.html#blog" class="nav-back">← Back to Blog</a>
+				<a href="index.html#blog" class="nav-back">← Back to Blog</a>
 			</div>
 		</nav>
 
 		<header class="hero">
 			<div class="eyebrow">iOS • INTERVIEW PREPARATION • EXPERIENCED DEVELOPERS</div>
-			<h1>iOS Interview <span>Questions &amp; Answers.</span></h1>
-			<p>Practical interview preparation for experienced iOS developers, focused on decisions, trade-offs, architecture, concurrency, performance, testing and production problems.</p>
-			<div class="meta"><span>Interview Preparation</span><span>•</span><span>Swift / UIKit / SwiftUI</span><span>•</span><span>Production-focused</span></div>
+			<h1>100 iOS Interview <span>Questions &amp; Answers.</span></h1>
+			<p>These questions focus on decisions, trade-offs, and production problems that experienced iOS developers are expected to understand—not only syntax.</p>
+			<div class="meta"><span>100 Questions</span><span>•</span><span>Swift / UIKit / SwiftUI</span><span>•</span><span>Production-focused</span></div>
 		</header>
 
 		<main class="questions" id="questions"></main>
@@ -208,45 +208,20 @@
 			const icon = document.getElementById("themeIcon");
 			const label = document.getElementById("themeLabel");
 			const hint = document.getElementById("themeHint");
-
-			function getTheme() {
-				const portfolioTheme = localStorage.getItem("portfolioTheme");
-				if (portfolioTheme === "light" || portfolioTheme === "dark") {
-					return portfolioTheme;
-				}
-				return localStorage.getItem("theme") === "light" ? "light" : "dark";
-			}
+			const savedTheme = localStorage.getItem("theme");
 
 			function applyTheme(theme) {
 				const isLight = theme === "light";
 				body.classList.toggle("light", isLight);
 				icon.textContent = isLight ? "🌙" : "☀️";
-				label.textContent = isLight ? "Light" : "Dark";
-				hint.textContent = isLight ? "Switch to Dark Theme" : "Classic if Dark Theme";
-				toggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
-			}
-
-			function saveTheme(theme) {
-				localStorage.setItem("portfolioTheme", theme);
+				label.textContent = isLight ? "Classic" : "Light";
+				hint.textContent = isLight ? "Classic if Dark Theme" : "Dark if White Theme";
 				localStorage.setItem("theme", theme);
 			}
 
-			applyTheme(getTheme());
-
+			applyTheme(savedTheme === "light" ? "light" : "dark");
 			toggle.addEventListener("click", function () {
-				const nextTheme = body.classList.contains("light") ? "dark" : "light";
-				saveTheme(nextTheme);
-				applyTheme(nextTheme);
-			});
-
-			window.addEventListener("pageshow", function () {
-				applyTheme(getTheme());
-			});
-
-			window.addEventListener("storage", function (event) {
-				if (event.key === "portfolioTheme" || event.key === "theme") {
-					applyTheme(getTheme());
-				}
+				applyTheme(body.classList.contains("light") ? "dark" : "light");
 			});
 		})();
 	</script>
