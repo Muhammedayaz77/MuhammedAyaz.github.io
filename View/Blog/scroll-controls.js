@@ -45,7 +45,7 @@
             }
 
             .scroll-button--top {
-                top: 92px;
+                top: 16px;
             }
 
             .scroll-button--bottom {
@@ -64,10 +64,6 @@
                 border-color: rgba(139, 92, 246, 0.55);
             }
 
-            .scroll-button.is-hidden:hover {
-                transform: scale(0.88);
-            }
-
             body.light .scroll-button {
                 background: rgba(255, 255, 255, 0.94);
                 color: #111827;
@@ -84,7 +80,7 @@
                 }
 
                 .scroll-button--top {
-                    top: 88px;
+                    top: 12px;
                 }
 
                 .scroll-button--bottom {
