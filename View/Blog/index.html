@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=../home.html#blog">
-    <title>Muhammed Ayaz | Blog</title>
-    <script>
-        window.location.replace("../home.html#blog");
-    </script>
+    <title>Blog | Muhammed Ayaz</title>
+    <meta name="description" content="Technical articles by Muhammed Ayaz covering Swift, SwiftUI, UIKit, architecture, performance and iOS interviews.">
+    <link rel="stylesheet" href="../../View Controller/styles.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body>
-    <p>Opening blog…</p>
+<div class="container blog-index">
+    <nav>
+        <a href="../home.html" class="logo">MA<span>.</span></a>
+        <div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Classic if Dark Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="../home.html#blog" class="company-link">← Portfolio</a></div>
+    </nav>
+    <main>
+        <div class="tag">BLOG</div>
+        <h1 class="section-title">iOS Engineering Articles</h1>
+        <p class="section-description">Search and explore practical writing on Swift, architecture, performance, UIKit, SwiftUI and interview preparation.</p>
+        <div class="blog-search"><input id="blogSearch" type="search" placeholder="Search articles…" aria-label="Search articles"></div>
+        <div class="blog-filters"><button class="blog-filter is-active" data-blog-filter="all" type="button">All</button><button class="blog-filter" data-blog-filter="Architecture" type="button">Architecture</button><button class="blog-filter" data-blog-filter="Swift" type="button">Swift</button><button class="blog-filter" data-blog-filter="Performance" type="button">Performance</button><button class="blog-filter" data-blog-filter="SwiftUI" type="button">SwiftUI</button><button class="blog-filter" data-blog-filter="UIKit" type="button">UIKit</button><button class="blog-filter" data-blog-filter="Interview" type="button">Interview</button></div>
+        <div class="blog-grid">
+            <article class="blog-index-card" data-blog-card data-category="Architecture"><span>Architecture</span><strong>Designing Scalable iOS Architecture</strong><small>Swift • MVVM • Clean Architecture</small><a href="designing-scalable-ios-architecture.html">Read article →</a></article>
+            <article class="blog-index-card" data-blog-card data-category="Swift"><span>Swift</span><strong>Swift Concurrency in Production</strong><small>Swift • Concurrency • Actors</small><a href="swift-concurrency.html">Read article →</a></article>
+            <article class="blog-index-card" data-blog-card data-category="Performance"><span>Performance</span><strong>iOS Performance</strong><small>Performance • Instruments • Optimization</small><a href="ios-performance.html">Read article →</a></article>
+            <article class="blog-index-card" data-blog-card data-category="SwiftUI"><span>SwiftUI</span><strong>SwiftUI Real-World Applications</strong><small>SwiftUI • Swift • Architecture</small><a href="swiftui-real-world.html">Read article →</a></article>
+            <article class="blog-index-card" data-blog-card data-category="UIKit"><span>UIKit</span><strong>UIKit Development: Lessons From Production</strong><small>UIKit • iOS • Production</small><a href="uikit-development-production.html">Read article →</a></article>
+            <article class="blog-index-card" data-blog-card data-category="Interview"><span>Interview</span><strong>iOS Interview Questions &amp; Answers</strong><small>Interview • Swift • iOS</small><a href="ios-interview-questions-answers.html">Read article →</a></article>
+        </div>
+    </main>
+    <footer>Muhammed Ayaz • Lead iOS Developer</footer>
+</div>
+<script src="../../View Controller/themeViewModel.js"></script>
+<script src="../../View Controller/portfolioViewModel.js"></script>
 </body>
 </html>
