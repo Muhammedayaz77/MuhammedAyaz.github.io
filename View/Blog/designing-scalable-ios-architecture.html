@@ -9,6 +9,7 @@
 body.light{background:#f7f8fc;color:#111827}body.light nav{border-bottom-color:rgba(17,24,39,.10)}body.light .nav-back,body.light .meta,body.light .theme-hint{color:#667085}body.light .theme-toggle{background:#fff;border-color:rgba(17,24,39,.13);color:#111827}body.light .theme-icon{background:#f1f2f6}body.light .hero:before{opacity:.08}body.light .hero p,body.light .article p,body.light .article ul{color:#5f6678}body.light .toc{background:#fff;border-color:rgba(17,24,39,.09)}body.light .toc a{color:#606a7d}body.light .quote{background:#f3f1ff;color:#374151}body.light .callout{color:#374151}body.light .diagram{background:#fff;border-color:rgba(17,24,39,.09);color:#374151}body.light .pill{background:#f3f1ff;color:#4c1d95}body.light .link-card{background:#fff}body.light .link-card p{color:#5f6678}body.light .compare th{background:#f3f4f8;color:#111827}body.light .compare td{color:#4b5563}body.light .compare th,body.light .compare td{border-color:rgba(17,24,39,.10)}body.light .check{background:#fff;border-color:rgba(17,24,39,.09);color:#4b5563}body.light .footer{border-top-color:rgba(17,24,39,.10);color:#6b7280}
 @media(max-width:850px){.layout{grid-template-columns:1fr}.toc{position:relative;top:0}.hero{padding-top:65px}.hero h1{letter-spacing:-2px}.article h2{font-size:28px}.checklist{grid-template-columns:1fr}.nav-tools{gap:9px}.theme-toggle{width:108px}.theme-hint{font-size:10px}}
 </style>
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body><div class="wrap">
 <nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Classic if Dark Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
@@ -73,5 +74,6 @@ function applyTheme(theme){const light=theme==='light';body.classList.toggle('li
 applyTheme(localStorage.getItem(key)||'dark');toggle.addEventListener('click',()=>applyTheme(body.classList.contains('light')?'dark':'light'));
 </script>
 <script src="scroll-controls.js"></script>
+    <script src="blogViewController.js"></script>
 </body>
 </html>
