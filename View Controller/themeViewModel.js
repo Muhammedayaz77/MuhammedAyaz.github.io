@@ -91,6 +91,16 @@ const ThemeViewModel = {
         if (toggle) {
             toggle.addEventListener("click", () => this.toggle());
         }
+
+        window.addEventListener("pageshow", () => {
+            this.applyTheme(this.getSavedTheme());
+        });
+
+        window.addEventListener("storage", (event) => {
+            if (event.key === "portfolioTheme") {
+                this.applyTheme(this.getSavedTheme());
+            }
+        });
     }
 };
 
