@@ -1,0 +1,26 @@
+name: Portfolio Audit
+
+on:
+  push:
+    branches:
+      - main
+      - website-updates
+  pull_request:
+    branches:
+      - main
+      - website-updates
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run portfolio audit
+        run: python Helper/portfolio_audit.py
