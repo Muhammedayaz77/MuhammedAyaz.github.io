@@ -66,7 +66,7 @@
 			<a href="index.html" class="logo">MA<span>.</span></a>
 			<div class="nav-tools">
 				<div class="theme-area">
-					<div class="theme-hint" id="themeHint">Classic if Dark Theme</div>
+					<div class="theme-hint" id="themeHint">Switch to Light Theme</div>
 					<button class="theme-toggle" id="themeToggle" type="button" aria-label="Change theme">
 						<span class="theme-icon" id="themeIcon">☀️</span>
 						<span class="theme-label" id="themeLabel">Light</span>
@@ -216,7 +216,7 @@
 				body.classList.toggle("light", isLight);
 				icon.textContent = isLight ? "🌙" : "☀️";
 				label.textContent = isLight ? "Classic" : "Light";
-				hint.textContent = isLight ? "Classic if Dark Theme" : "Dark if White Theme";
+				hint.textContent = isLight ? "Switch to Light Theme" : "Dark if White Theme";
 				localStorage.setItem("theme", theme);
 			}
 
@@ -226,7 +226,8 @@
 			});
 		})();
 	</script>
-	<script src="scroll-controls.js"></script>
+    <script src="../../View Controller/themeViewModel.js"></script>
+    <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
 </body>
 </html>

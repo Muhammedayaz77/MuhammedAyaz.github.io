@@ -13,7 +13,7 @@ body.light{background:#f7f8fc;color:#111827}body.light nav{border-bottom-color:r
 </head>
 <body>
 <div class="wrap">
-<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Classic if Dark Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
+<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Switch to Light Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
 <header class="hero"><div class="eyebrow">SWIFTUI • iOS • PRODUCTION</div><h1>SwiftUI in <span>Real-World Applications.</span></h1><p>SwiftUI makes it easy to describe a screen. The real engineering starts when that screen has real data, real navigation, real state, real performance constraints, and users doing things in an order you did not expect.</p><div class="meta"><span>Technical Article</span><span>•</span><span>iOS / SwiftUI</span><span>•</span><span>Production-focused</span></div></header>
 <div class="layout"><aside class="toc"><strong>On this page</strong><a href="#beyond">Beyond the basics</a><a href="#lifecycle">View lifecycle</a><a href="#state">State & ownership</a><a href="#design">View design</a><a href="#identity">View identity</a><a href="#lists">Lists & scrolling</a><a href="#networking">Networking</a><a href="#concurrency">Swift Concurrency</a><a href="#performance">Performance</a><a href="#architecture">Architecture</a><a href="#navigation">Navigation</a><a href="#forms">Forms & input</a><a href="#animation">Animation</a><a href="#uikit">UIKit integration</a><a href="#testing">Testing & previews</a><a href="#accessibility">Accessibility</a><a href="#mistakes">Common mistakes</a><a href="#production">Production feature</a></aside>
 <main class="article">
@@ -51,10 +51,11 @@ body.light{background:#f7f8fc;color:#111827}body.light nav{border-bottom-color:r
 </div>
 <script>
 const body=document.body,btn=document.getElementById('themeToggle'),icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel'),hint=document.getElementById('themeHint');
-function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Classic if Dark Theme';btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem('portfolioTheme',theme)}
+function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Switch to Light Theme';btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem('portfolioTheme',theme)}
 applyTheme(localStorage.getItem('portfolioTheme')||'dark');btn.addEventListener('click',()=>applyTheme(body.classList.contains('light')?'dark':'light'));
 </script>
-    <script src="scroll-controls.js"></script>
+    <script src="../../View Controller/themeViewModel.js"></script>
+    <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
 </body>
 </html>

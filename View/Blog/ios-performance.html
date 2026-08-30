@@ -14,7 +14,7 @@ body.light{background:#f7f8fc;color:#111827}body.light nav{border-bottom-color:r
 </head>
 <body>
 <div class="wrap">
-<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Classic if Dark Theme</div><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
+<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Switch to Light Theme</div><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
 <header class="hero"><div class="eyebrow">iOS • PERFORMANCE • PRODUCTION</div><h1>Improving <span>iOS App Performance.</span></h1><p>Performance is not one number. It is the combined experience of launch speed, UI responsiveness, memory use, networking, rendering, concurrency, energy consumption and how the application behaves on real devices in production.</p><div class="meta"><span>Technical Article</span><span>•</span><span>iOS / Swift</span><span>•</span><span>Production-focused</span></div></header>
 <div class="layout">
 <aside class="toc"><strong>On this page</strong><a href="#meaning">What performance means</a><a href="#measure">Measure first</a><a href="#instruments">Instruments</a><a href="#launch">Launch</a><a href="#main-thread">Main thread</a><a href="#concurrency">Swift Concurrency</a><a href="#swiftui">SwiftUI</a><a href="#uikit">UIKit</a><a href="#scrolling">Scrolling</a><a href="#images">Images</a><a href="#memory">Memory</a><a href="#networking">Networking</a><a href="#data">Data & persistence</a><a href="#caching">Caching</a><a href="#rendering">Rendering</a><a href="#energy">Battery & energy</a><a href="#background">Background work</a><a href="#testing">Performance testing</a><a href="#production">Production monitoring</a><a href="#mistakes">Common mistakes</a><a href="#checklist">Checklist</a></aside>
@@ -62,7 +62,7 @@ function applyTheme(theme){
  const light=theme==='light';
  icon.textContent=light?'🌙':'☀️';
  label.textContent=light?'Light':'Dark';
- hint.textContent=light?'Dark if White Theme':'Classic if Dark Theme';
+ hint.textContent=light?'Dark if White Theme':'Switch to Light Theme';
  toggle.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
 }
 applyTheme(localStorage.getItem(themeKey)||'dark');
@@ -72,7 +72,8 @@ toggle.addEventListener('click',()=>{
  applyTheme(next);
 });
 </script>
-    <script src="scroll-controls.js"></script>
+    <script src="../../View Controller/themeViewModel.js"></script>
+    <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
 </body>
 </html>

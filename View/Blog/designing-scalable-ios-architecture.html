@@ -12,7 +12,7 @@ body.light{background:#f7f8fc;color:#111827}body.light nav{border-bottom-color:r
     <link rel="stylesheet" href="blog.css">
 </head>
 <body><div class="wrap">
-<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Classic if Dark Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
+<nav><a href="index.html" class="logo">MA<span>.</span></a><div class="nav-tools"><div class="theme-area"><div class="theme-hint" id="themeHint">Switch to Light Theme</div><button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button></div><a href="index.html#blog" class="nav-back">← Back to Blog</a></div></nav>
 <header class="hero"><div class="eyebrow">iOS • ARCHITECTURE • PRODUCTION</div><h1>Designing Scalable <span style="background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">iOS Architecture.</span></h1><p>Good architecture is not about having the most folders or the most patterns. It is about making features easier to change, test, understand, and maintain as the application grows.</p><div class="meta"><span>Technical Article</span><span>•</span><span>iOS / Swift</span><span>•</span><span>Production-focused</span></div></header>
 <div class="layout"><aside class="toc"><strong>On this page</strong><a href="#scalable">What scalable means</a><a href="#decisions">Architecture is decisions</a><a href="#mvc">MVC</a><a href="#mvvm">MVVM</a><a href="#viper">VIPER</a><a href="#clean">Clean Architecture</a><a href="#feature">Feature-based design</a><a href="#dependencies">Dependency injection</a><a href="#state">State ownership</a><a href="#networking">Networking & data</a><a href="#concurrency">Concurrency</a><a href="#navigation">Navigation</a><a href="#testing">Testing</a><a href="#over">Over-engineering</a><a href="#production">Production example</a><a href="#checklist">Checklist</a></aside>
 <main class="article">
@@ -70,10 +70,11 @@ Network / Database</pre><p>This separation also makes it easier to swap a live A
 </div>
 <script>
 const key='portfolioTheme';const body=document.body;const toggle=document.getElementById('themeToggle');const icon=document.getElementById('themeIcon');const label=document.getElementById('themeLabel');const hint=document.getElementById('themeHint');
-function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Classic if Dark Theme';toggle.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem(key,theme)}
+function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Switch to Light Theme';toggle.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem(key,theme)}
 applyTheme(localStorage.getItem(key)||'dark');toggle.addEventListener('click',()=>applyTheme(body.classList.contains('light')?'dark':'light'));
 </script>
-<script src="scroll-controls.js"></script>
+    <script src="../../View Controller/themeViewModel.js"></script>
+    <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
 </body>
 </html>
