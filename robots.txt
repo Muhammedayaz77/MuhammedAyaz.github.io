@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://muhammedayaz77.github.io/MuhammedAyaz.github.io/sitemap.xml
