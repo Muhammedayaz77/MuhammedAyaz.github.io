@@ -96,7 +96,7 @@ const ThemeViewModel = {
             }
 
             .scroll-button--top {
-                top: 92px;
+                top: 16px;
             }
 
             .scroll-button--bottom {
@@ -131,7 +131,7 @@ const ThemeViewModel = {
                 }
 
                 .scroll-button--top {
-                    top: 88px;
+                    top: 12px;
                 }
 
                 .scroll-button--bottom {
