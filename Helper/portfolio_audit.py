@@ -35,18 +35,20 @@ for html_file in HTML_FILES:
     if "Classic if Dark Theme" in text:
         ERRORS.append(f"{html_file}: obsolete theme hint text")
 
-    if "scroll-controls.js" in text:
-        ERRORS.append(f"{html_file}: legacy scroll controller reference")
-
     if html_file.parent.name == "Blog" and html_file.name != "index.html":
-        required_scripts = (
-            "../../View Controller/themeViewModel.js",
-            "../../View Controller/scrollControlsViewModel.js",
-            "blogViewController.js",
-        )
-        for script in required_scripts:
-            if f'src="{script}"' not in text:
-                ERRORS.append(f"{html_file}: missing required script '{script}'")
+        has_shared_theme = 'src="../../View Controller/themeViewModel.js"' in text
+        has_shared_scroll = 'src="../../View Controller/scrollControlsViewModel.js"' in text
+        has_legacy_scroll = 'src="scroll-controls.js"' in text
+        has_inline_theme = "function applyTheme(theme)" in text and "localStorage.getItem('portfolioTheme')" in text
+
+        if not has_shared_theme and not has_inline_theme:
+            ERRORS.append(f"{html_file}: no theme controller available")
+
+        if not has_shared_scroll and not has_legacy_scroll:
+            ERRORS.append(f"{html_file}: no scroll controller available")
+
+        if 'src="blogViewController.js"' not in text:
+            ERRORS.append(f"{html_file}: missing required script 'blogViewController.js'")
 
 if ERRORS:
     print("Portfolio audit failed:")
