@@ -11,6 +11,7 @@ for path in sorted(BLOG.glob("*.html")):
     text = text.replace("100 iOS Interview Questions &amp; Answers", "iOS Interview Questions &amp; Answers")
     text = text.replace("100 iOS Interview Questions & Answers", "iOS Interview Questions & Answers")
     text = text.replace("100 Questions", "Interview Questions")
+    text = text.replace("100 practical iOS interview questions and answers", "Practical iOS interview questions and answers")
 
     if 'href="blog.css"' not in text:
         text = text.replace("</head>", '    <link rel="stylesheet" href="blog.css">\n</head>', 1)
