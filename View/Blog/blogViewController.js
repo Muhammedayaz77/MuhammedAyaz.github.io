@@ -11,25 +11,23 @@ const BlogViewController = {
     calculateReadingTime() {
         const article = document.querySelector(".article");
         const target = document.getElementById("readingTime");
-        if (!article || !target) {
-            return;
-        }
+        if (!article || !target) return;
 
         const words = article.textContent.trim().split(/\s+/).filter(Boolean).length;
-        const minutes = Math.max(1, Math.ceil(words / 220));
-        target.textContent = `${minutes} min read`;
+        target.textContent = `${Math.max(1, Math.ceil(words / 220))} min read`;
     },
 
     addMetadata() {
         const path = window.location.pathname.split("/").pop();
         const article = this.articles.find((item) => item.slug === path);
-        if (!article) {
-            return;
-        }
+        if (!article) return;
 
         const eyebrow = document.querySelector(".eyebrow");
         if (eyebrow) {
-            eyebrow.insertAdjacentHTML("afterend", `<div class="blog-tags">${article.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>`);
+            eyebrow.insertAdjacentHTML(
+                "afterend",
+                `<div class="blog-tags">${article.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>`
+            );
         }
 
         const meta = document.querySelector(".meta");
@@ -42,14 +40,13 @@ const BlogViewController = {
         const path = window.location.pathname.split("/").pop();
         const index = this.articles.findIndex((item) => item.slug === path);
         const article = document.querySelector(".article");
-        if (!article || index === -1) {
-            return;
-        }
+        if (!article || index === -1) return;
 
         const previous = this.articles[index - 1];
         const next = this.articles[index + 1];
-        const navigation = document.createElement("nav");
+        const navigation = document.createElement("div");
         navigation.className = "article-navigation";
+        navigation.setAttribute("role", "navigation");
         navigation.setAttribute("aria-label", "Article navigation");
         navigation.innerHTML = `
             ${previous ? `<a href="${previous.slug}" class="article-nav-card"><small>Previous</small><strong>← ${previous.title}</strong></a>` : "<span></span>"}
@@ -62,9 +59,7 @@ const BlogViewController = {
         const path = window.location.pathname.split("/").pop();
         const current = this.articles.find((item) => item.slug === path);
         const article = document.querySelector(".article");
-        if (!article || !current) {
-            return;
-        }
+        if (!article || !current) return;
 
         const related = this.articles
             .filter((item) => item.slug !== current.slug)
