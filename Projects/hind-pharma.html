@@ -20,7 +20,6 @@
         .project-panel { background: #10111d; border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 22px; }
         .project-panel h3 { margin-bottom: 8px; }
         .project-panel p, .project-panel li { color: #999bab; font-size: 15px; }
-        .project-panel ul { padding-left: 20px; margin-top: 10px; }
         .project-section { margin-top: 35px; }
         .project-section h2 { font-size: 34px; margin-bottom: 10px; }
         .project-section > p { color: #999bab; max-width: 760px; margin-bottom: 18px; }
@@ -45,73 +44,31 @@
     <div class="nav-tools">
         <div class="theme-area">
             <div class="theme-hint" id="themeHint">Switch to Light Theme</div>
-            <button class="theme-toggle" id="themeToggle" type="button">
-                <span class="theme-icon" id="themeIcon">☀️</span>
-                <span class="theme-label" id="themeLabel">Dark</span>
-            </button>
+            <button class="theme-toggle" id="themeToggle" type="button"><span class="theme-icon" id="themeIcon">☀️</span><span class="theme-label" id="themeLabel">Dark</span></button>
         </div>
         <a href="../View/home.html#contact" class="nav-button">Get In Touch</a>
     </div>
 </nav>
-
 <main class="project-page">
     <a class="project-back" href="../View/home.html#projects">← Back to Projects</a>
-
     <section class="project-hero">
         <div class="tag">WEB • BUSINESS PLATFORM</div>
         <h1>Hind Pharma <span>Management Platform.</span></h1>
         <p>A practical multi-tenant pharmacy management platform built around real business workflows, including shop administration, medical and product management, order processing, employee work and daily calling.</p>
-        <div class="project-actions">
-            <a class="btn btn-primary" href="https://github.com/Muhammedayaz77/HindPharma" target="_blank" rel="noopener">View GitHub Repository ↗</a>
-            <a class="btn btn-secondary" href="https://muhammedayaz77.github.io/HindPharma/shop/hind-pharma" target="_blank" rel="noopener">Open Live Demo ↗</a>
-            <a class="btn btn-secondary" href="../View/home.html#projects">View Other Projects</a>
-        </div>
+        <div class="project-actions"><a class="btn btn-primary" href="https://github.com/Muhammedayaz77/HindPharma" target="_blank" rel="noopener">View GitHub Repository ↗</a><a class="btn btn-secondary" href="https://muhammedayaz77.github.io/HindPharma/shop/hind-pharma" target="_blank" rel="noopener">Open Live Demo ↗</a><a class="btn btn-secondary" href="../View/home.html#projects">View Other Projects</a></div>
     </section>
-
     <div class="project-grid">
-        <article class="project-panel">
-            <h3>Multi-Tenant</h3>
-            <p>Shop identity is isolated by tenant, with separate users, medicals, products, orders and calling data for each business.</p>
-        </article>
-        <article class="project-panel">
-            <h3>Business Workflow</h3>
-            <p>Admin, Manager and Employee flows cover daily operations from medical selection and ordering to employee calling work.</p>
-        </article>
-        <article class="project-panel">
-            <h3>HTG Control</h3>
-            <p>An HTG Super Admin layer manages business units and business Admin accounts separately from shop-level users.</p>
-        </article>
+        <article class="project-panel"><h3>Multi-Tenant</h3><p>Shop identity is isolated by tenant, with separate users, medicals, products, orders and calling data for each business.</p></article>
+        <article class="project-panel"><h3>Business Workflow</h3><p>Admin, Manager and Employee flows cover daily operations from medical selection and ordering to employee calling work.</p></article>
+        <article class="project-panel"><h3>HTG Control</h3><p>An HTG Super Admin layer manages business units and business Admin accounts separately from shop-level users.</p></article>
     </div>
-
-    <section class="project-section">
-        <div class="tag">CORE WORKFLOWS</div>
-        <h2>Designed around real pharmacy operations.</h2>
-        <div class="project-grid">
-            <article class="project-panel"><h3>Order Flow</h3><p>Home → Medical List → Medical → Product List → Products → Final Order → Submit Order.</p></article>
-            <article class="project-panel"><h3>Daily Calling</h3><p>Today's medicals, contact details, call action and automatic call-event recording with activity safeguards.</p></article>
-            <article class="project-panel"><h3>Administration</h3><p>Business Admin manages the tenant while Managers and Employees work inside clearly separated operational flows.</p></article>
-        </div>
-    </section>
-
-    <section class="project-section">
-        <div class="tag">ARCHITECTURE</div>
-        <h2>Simple stack with clear separation.</h2>
-        <p>The project uses a web frontend with a FastAPI backend and SQLite as the persistent database. Tenant-aware data separation is built into the application model.</p>
-    </section>
-
-    <section class="project-section">
-        <div class="tag">ENGINEERING FOCUS</div>
-        <h2>Built for a real business, not just a demo.</h2>
-        <div class="project-grid">
-            <article class="project-panel"><h3>Role Hierarchy</h3><p>HTG Super Admin → Business Admin → Manager → Employee.</p></article>
-            <article class="project-panel"><h3>Data Isolation</h3><p>Tenant and admin identifiers keep operational records associated with the correct business.</p></article>
-            <article class="project-panel"><h3>Production Direction</h3><p>GitHub Pages provides the current browser testing experience; the final production deployment connects the frontend to the persistent backend and payment gateway.</p></article>
-        </div>
-    </section>
+    <section class="project-section"><div class="tag">CORE WORKFLOWS</div><h2>Designed around real pharmacy operations.</h2><div class="project-grid"><article class="project-panel"><h3>Order Flow</h3><p>Home → Medical List → Medical → Product List → Products → Final Order → Submit Order.</p></article><article class="project-panel"><h3>Daily Calling</h3><p>Today's medicals, contact details, call action and automatic call-event recording with activity safeguards.</p></article><article class="project-panel"><h3>Administration</h3><p>Business Admin manages the tenant while Managers and Employees work inside clearly separated operational flows.</p></article></div></section>
+    <section class="project-section"><div class="tag">ARCHITECTURE</div><h2>Simple stack with clear separation.</h2><p>The project uses a web frontend with a FastAPI backend and SQLite as the persistent database. Tenant-aware data separation is built into the application model.</p></section>
+    <section class="project-section"><div class="tag">ENGINEERING FOCUS</div><h2>Built for a real business, not just a demo.</h2><div class="project-grid"><article class="project-panel"><h3>Role Hierarchy</h3><p>HTG Super Admin → Business Admin → Manager → Employee.</p></article><article class="project-panel"><h3>Data Isolation</h3><p>Tenant and admin identifiers keep operational records associated with the correct business.</p></article><article class="project-panel"><h3>Production Direction</h3><p>GitHub Pages provides the current browser testing experience; the final production deployment connects the frontend to the persistent backend and payment gateway.</p></article></div></section>
 </main>
-
 <footer>Muhammed Ayaz • Lead iOS Developer<div class="footer-links"><a href="../View/home.html">Home</a><a href="../View/home.html#projects">Projects</a><a href="../View/home.html#contact">Contact</a></div></footer>
 </div>
 <script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
 </body>
 </html>
