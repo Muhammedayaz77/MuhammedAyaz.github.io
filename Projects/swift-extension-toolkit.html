@@ -20,18 +20,17 @@
         .project-panel { background: #10111d; border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 22px; }
         .project-panel h3 { margin-bottom: 8px; }
         .project-panel p, .project-panel li { color: #999bab; font-size: 15px; }
-        .project-panel ul { padding-left: 20px; margin-top: 10px; }
         .project-section { margin-top: 35px; }
         .project-section h2 { font-size: 34px; margin-bottom: 10px; }
         .project-section > p { color: #999bab; max-width: 760px; margin-bottom: 18px; }
         .code-card { background: #0b0c15; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 18px; overflow-x: auto; }
         .code-card pre { margin: 0; color: #ddd; font: 14px/1.7 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
         .project-back { display: inline-block; color: #a78bfa; font-size: 14px; font-weight: 700; margin-bottom: 20px; }
-        @media(max-width: 800px) { .project-grid { grid-template-columns: 1fr; } }
         body.light .project-hero p, body.light .project-panel p, body.light .project-panel li, body.light .project-section > p { color: #5f6678; }
         body.light .project-panel { background: #fff; border-color: rgba(17,24,39,.09); box-shadow: 0 10px 35px rgba(17,24,39,.05); }
         body.light .code-card { background: #f3f4f8; border-color: rgba(17,24,39,.09); }
         body.light .code-card pre { color: #374151; }
+        @media(max-width: 800px) { .project-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -57,10 +56,8 @@
         <a href="../View/home.html#contact" class="nav-button">Get In Touch</a>
     </div>
 </nav>
-
 <main class="project-page">
     <a class="project-back" href="../View/home.html#projects">← Back to Projects</a>
-
     <section class="project-hero">
         <div class="tag">OPEN SOURCE • SWIFT / iOS</div>
         <h1>Reusable <span>Swift Developer Toolkit.</span></h1>
@@ -70,60 +67,26 @@
             <a class="btn btn-secondary" href="../View/home.html#projects">View Other Projects</a>
         </div>
     </section>
-
     <div class="project-grid">
-        <article class="project-panel">
-            <h3>Foundation</h3>
-            <p>Reusable helpers for collections, strings, dates, URLs, data, persistence and other common Foundation types.</p>
-        </article>
-        <article class="project-panel">
-            <h3>UIKit</h3>
-            <p>Everyday extensions for views, controls, images, colors, tables, collections, device information and view controllers.</p>
-        </article>
-        <article class="project-panel">
-            <h3>SwiftUI</h3>
-            <p>Modern extensions for View, Color, Image and Binding to support clean and reusable SwiftUI code.</p>
-        </article>
+        <article class="project-panel"><h3>Foundation</h3><p>Reusable helpers for collections, strings, dates, URLs, data, persistence and other common Foundation types.</p></article>
+        <article class="project-panel"><h3>UIKit</h3><p>Everyday extensions for views, controls, images, colors, tables, collections, device information and view controllers.</p></article>
+        <article class="project-panel"><h3>SwiftUI</h3><p>Modern extensions for View, Color, Image and Binding to support clean and reusable SwiftUI code.</p></article>
     </div>
-
-    <section class="project-section">
-        <div class="tag">WHY I BUILT IT</div>
-        <h2>Write once. Reuse across projects.</h2>
-        <p>The goal is not to collect methods just to increase the number of extensions. The focus is on small, understandable pieces of functionality that are useful across different iOS applications.</p>
-    </section>
-
-    <section class="project-section">
-        <div class="tag">ENGINEERING APPROACH</div>
-        <h2>Simple structure, consistent quality.</h2>
-        <div class="project-grid">
-            <article class="project-panel"><h3>Extension-first</h3><p>Functionality is added directly to existing Swift and Apple framework types instead of creating unnecessary utility wrappers.</p></article>
-            <article class="project-panel"><h3>Organized</h3><p>Foundation, UIKit and SwiftUI are separated so the toolkit can grow without becoming difficult to navigate.</p></article>
-            <article class="project-panel"><h3>Consistent</h3><p>Swift formatting is enforced with a shared configuration and GitHub Actions checks.</p></article>
-        </div>
-    </section>
-
-    <section class="project-section">
-        <div class="tag">EXAMPLE</div>
-        <h2>Readable APIs for everyday work.</h2>
-        <div class="code-card"><pre>let name = "Hind Tech Group"
+    <section class="project-section"><div class="tag">WHY I BUILT IT</div><h2>Write once. Reuse across projects.</h2><p>The goal is not to collect methods just to increase the number of extensions. The focus is on small, understandable pieces of functionality that are useful across different iOS applications.</p></section>
+    <section class="project-section"><div class="tag">ENGINEERING APPROACH</div><h2>Simple structure, consistent quality.</h2><div class="project-grid"><article class="project-panel"><h3>Extension-first</h3><p>Functionality is added directly to existing Swift and Apple framework types instead of creating unnecessary utility wrappers.</p></article><article class="project-panel"><h3>Organized</h3><p>Foundation, UIKit and SwiftUI are separated so the toolkit can grow without becoming difficult to navigate.</p></article><article class="project-panel"><h3>Consistent</h3><p>Swift formatting is enforced with a shared configuration and GitHub Actions checks.</p></article></div></section>
+    <section class="project-section"><div class="tag">EXAMPLE</div><h2>Readable APIs for everyday work.</h2><div class="code-card"><pre>let name = "Hind Tech Group"
 let length = name.getLength()
 
 let data = try user.toJSONData()
 let decodedUser = try data.decoded(as: User.self)
 
 let view = UIView()
-view.setSize(width: 100, height: 100)</pre></div>
-    </section>
-
-    <section class="project-section">
-        <div class="tag">FUTURE ROADMAP</div>
-        <h2>Built to grow into a stronger developer package.</h2>
-        <p>Future iterations can add focused high-value extensions, unit tests, Swift Package Manager support, more usage examples and expanded API documentation.</p>
-    </section>
+view.setSize(width: 100, height: 100)</pre></div></section>
+    <section class="project-section"><div class="tag">FUTURE ROADMAP</div><h2>Built to grow into a stronger developer package.</h2><p>Future iterations can add focused high-value extensions, unit tests, Swift Package Manager support, more usage examples and expanded API documentation.</p></section>
 </main>
-
 <footer>Muhammed Ayaz • Lead iOS Developer<div class="footer-links"><a href="../View/home.html">Home</a><a href="../View/home.html#projects">Projects</a><a href="../View/home.html#contact">Contact</a></div></footer>
 </div>
 <script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
 </body>
 </html>
