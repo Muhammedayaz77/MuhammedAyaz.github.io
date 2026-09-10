@@ -61,3 +61,32 @@ test("important local links resolve", async ({ page, request }) => {
         expect(response.status(), href).toBeLessThan(400);
     }
 });
+
+test("mobile layout has no horizontal overflow", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(homePath, { waitUntil: "networkidle" });
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+    await expect(page.locator(".nav-button")).toBeVisible();
+});
+
+test("homepage stays within basic performance budgets", async ({ page }) => {
+    const start = Date.now();
+    await page.goto(homePath, { waitUntil: "networkidle" });
+    const loadMs = Date.now() - start;
+    const transferBytes = await page.evaluate(() => performance.getEntriesByType("resource").reduce((total, entry) => total + (entry.transferSize || 0), 0));
+    expect(loadMs).toBeLessThan(5000);
+    expect(transferBytes).toBeLessThan(3_000_000);
+});
+
+test("critical external destinations respond", async ({ request }) => {
+    const urls = [
+        "https://github.com/Muhammedayaz77",
+        "https://in.linkedin.com/in/muhammed-ayaz-019150a8",
+        "https://formsubmit.co/"
+    ];
+    for (const url of urls) {
+        const response = await request.get(url, { maxRedirects: 5 });
+        expect(response.status(), url).toBeLessThan(500);
+    }
+});
