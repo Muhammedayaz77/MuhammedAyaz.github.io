@@ -1,0 +1,11 @@
+{
+  "name": "muhammed-ayaz-portfolio-quality",
+  "private": true,
+  "scripts": {
+    "test:portfolio": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0"
+  }
+}
