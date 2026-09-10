@@ -17,6 +17,14 @@ const PortfolioModel = Object.freeze({
         "TechNex historical tNex site identity": "TN"
     },
 
+    experienceHighlights: [
+        { company: "Hind Pharma, Nanded", text: "Own product, business and technology direction while building a practical pharmacy management platform and internal workflows." },
+        { company: "Etimad Pvt. Ltd., Abu Dhabi", text: "Built and maintained production iOS applications with a focus on reliability, maintainable architecture and enterprise delivery." },
+        { company: "Indecomm Global Services Pvt. Ltd., Pune", text: "Delivered native iOS features and production fixes across client-facing mobile applications." },
+        { company: "iT Gurus Software Pvt. Ltd., Pune", text: "Developed software features, integrations and reusable engineering components for application teams." },
+        { company: "TechNex Technologies Pvt. Ltd., Pune", text: "Started professional software engineering with hands-on application development and practical delivery experience." }
+    ],
+
     recruiterSkills: [
         "Swift", "SwiftUI", "UIKit", "Objective-C", "MVVM", "Clean Architecture",
         "SOLID", "Dependency Injection", "REST APIs", "JSON", "Git", "GitHub",
