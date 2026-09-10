@@ -1,7 +1,6 @@
 const PortfolioViewModel = {
     initializeRecruiterActions() {
         if (typeof PortfolioModel === "undefined") return;
-
         const heroButtons = document.querySelector(".hero .buttons");
         if (heroButtons && !document.getElementById("recruiterLinks")) {
             const links = document.createElement("div");
@@ -10,7 +9,6 @@ const PortfolioViewModel = {
             links.innerHTML = `<a class="btn btn-secondary" href="${PortfolioModel.profile.linkedIn}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="btn btn-secondary" href="${PortfolioModel.profile.github}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span class="availability-badge" aria-label="${PortfolioModel.profile.availability}"><span aria-hidden="true"></span>${PortfolioModel.profile.availability}</span>`;
             heroButtons.appendChild(links);
         }
-
         document.querySelectorAll(".company-logo").forEach((image) => {
             const label = image.getAttribute("alt") || "Company";
             const initials = PortfolioModel.companyLogos[label] || label.split(/\s+/).slice(0, 2).map((word) => word[0]).join("").toUpperCase();
@@ -20,6 +18,21 @@ const PortfolioViewModel = {
             logo.setAttribute("aria-label", label);
             logo.textContent = initials;
             image.replaceWith(logo);
+        });
+    },
+
+    initializeExperienceHighlights() {
+        if (typeof PortfolioModel === "undefined") return;
+        const cards = [...document.querySelectorAll(".experience-card")];
+        cards.forEach((card) => {
+            if (card.querySelector(".experience-highlight")) return;
+            const companyText = card.querySelector("p")?.textContent?.trim();
+            const item = PortfolioModel.experienceHighlights.find((entry) => companyText?.includes(entry.company.split(",")[0]));
+            if (!item) return;
+            const highlight = document.createElement("p");
+            highlight.className = "experience-highlight";
+            highlight.textContent = item.text;
+            card.appendChild(highlight);
         });
     },
 
@@ -53,7 +66,6 @@ const PortfolioViewModel = {
             const meta = document.querySelector(selector);
             if (meta) meta.setAttribute("content", value);
         });
-
         if (!document.getElementById("portfolioStructuredData")) {
             const script = document.createElement("script");
             script.id = "portfolioStructuredData";
@@ -123,7 +135,6 @@ const PortfolioViewModel = {
         const status = document.getElementById("contactStatus");
         const submitButton = form?.querySelector('button[type="submit"]');
         if (!form || !status || typeof PortfolioModel === "undefined") return;
-
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
             if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -135,7 +146,7 @@ const PortfolioViewModel = {
             status.textContent = "Sending your message…";
             status.classList.add("is-visible");
             try {
-                const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(PortfolioModel.profile.email)}`, {
+                const response = await fetch(`https://formsubmit.co/ajax/${PortfolioModel.profile.email}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json", Accept: "application/json" },
                     body: JSON.stringify({ name, email, subject, message, _subject: subject, _template: "table" })
@@ -161,6 +172,7 @@ const PortfolioViewModel = {
 
     initialize() {
         this.initializeRecruiterActions();
+        this.initializeExperienceHighlights();
         this.initializeRecruiterSkills();
         this.initializeSEO();
         this.initializeBlogSearch();
