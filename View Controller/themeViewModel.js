@@ -20,6 +20,32 @@ const ThemeViewModel = {
         localStorage.setItem(this.legacyThemeKey, theme === "system" ? "system" : theme);
     },
 
+    applyCopyCorrections() {
+        const corrections = new Map([
+            ["Get In Touch", "Get in Touch"],
+            ["A career spanning iOS development, software engineering and business ownership.", "My career spans iOS development, software engineering and business ownership."],
+            ["12+ years of engineering and product experience.", "12+ years of engineering and product-development experience."],
+            ["Years Experience", "Years of Experience"],
+            ["Today's medicals, contact details, call action and automatic call-event recording with activity safeguards.", "Today’s medical contacts, call actions, and automatic call-event recording with activity safeguards."],
+            ["employee work", "employee workflows"],
+            ["Built to grow into a stronger developer package.", "Built to grow into a stronger developer package."],
+            ["Write once. Reuse across projects.", "Write once. Reuse across projects."],
+            ["Simple stack with clear separation.", "A simple stack with clear separation."],
+            ["Simple structure, consistent quality.", "A simple structure with consistent quality."]
+        ]);
+
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach((node) => {
+            let value = node.nodeValue;
+            corrections.forEach((replacement, source) => {
+                if (value.includes(source)) value = value.split(source).join(replacement);
+            });
+            node.nodeValue = value;
+        });
+    },
+
     applyTheme(theme) {
         const effectiveTheme = this.getEffectiveTheme(theme);
         const isLight = effectiveTheme === "light";
@@ -47,6 +73,7 @@ const ThemeViewModel = {
         const savedTheme = this.getSavedTheme();
         this.saveTheme(savedTheme);
         this.applyTheme(savedTheme);
+        this.applyCopyCorrections();
 
         const toggle = document.getElementById("themeToggle");
         if (toggle) toggle.addEventListener("click", () => this.toggle());
