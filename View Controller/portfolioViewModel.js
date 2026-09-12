@@ -10,8 +10,15 @@ const PortfolioViewModel = {
             heroButtons.appendChild(links);
         }
         document.querySelectorAll(".company-logo").forEach((image) => {
-            const label = image.getAttribute("alt") || "Company";
-            const initials = PortfolioModel.companyLogos[label] || label.split(/\s+/).slice(0, 2).map((word) => word[0]).join("").toUpperCase();
+            const label = image.getAttribute("alt") || image.getAttribute("aria-label") || "Company";
+            const initials = PortfolioModel.companyLogos[label] || image.textContent.trim() || label.split(/\s+/).slice(0, 2).map((word) => word[0]).join("").toUpperCase();
+            if (image.tagName !== "IMG") {
+                image.classList.add("company-logo-text");
+                image.setAttribute("role", "img");
+                image.setAttribute("aria-label", label);
+                image.textContent = initials;
+                return;
+            }
             const logo = document.createElement("div");
             logo.className = "company-logo-text";
             logo.setAttribute("role", "img");
