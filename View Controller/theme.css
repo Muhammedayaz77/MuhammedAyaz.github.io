@@ -77,6 +77,25 @@ body.light {
   --theme-grid: rgba(21, 154, 115, .055);
   --theme-brand-glow-strong: rgba(21, 154, 115, .18);
   --theme-brand-glow-soft: rgba(21, 154, 115, .07);
+  --bg: var(--theme-bg);
+  --surface: var(--theme-surface);
+  --surface-2: var(--theme-surface-2);
+  --surface-3: var(--theme-surface-3);
+  --text: var(--theme-text);
+  --heading: var(--theme-heading);
+  --muted: var(--theme-muted);
+  --subtle: var(--theme-subtle);
+  --brand: var(--theme-brand);
+  --brand-2: var(--theme-brand-strong);
+  --brand-soft: var(--theme-brand-soft);
+  --on-brand: var(--theme-on-brand);
+  --line: var(--theme-line);
+  --line-strong: var(--theme-line-strong);
+  --glow: var(--theme-glow);
+  --overlay: var(--theme-overlay);
+  --glass: var(--theme-glass);
+  --code-bg: var(--theme-code);
+  --shadow-color: var(--theme-shadow);
 }
 
 /* Global theme application */
