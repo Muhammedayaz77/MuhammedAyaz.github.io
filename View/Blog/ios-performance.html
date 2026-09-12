@@ -52,27 +52,6 @@ await MainActor.run {
 </main></div>
 <footer class="footer">© 2026 Muhammed Ayaz<br><a class="back" href="index.html#blog">← Back to all articles</a></footer>
 </div>
-<script>
-const themeKey='portfolioTheme';
-const toggle=document.getElementById('themeToggle');
-const icon=document.getElementById('themeIcon');
-const label=document.getElementById('themeLabel');
-const hint=document.getElementById('themeHint');
-function applyTheme(theme){
- document.body.classList.toggle('light',theme==='light');
- const light=theme==='light';
- icon.textContent=light?'🌙':'☀️';
- label.textContent=light?'Light':'Dark';
- hint.textContent=light?'Dark if White Theme':'Switch to Light Theme';
- toggle.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
-}
-applyTheme(localStorage.getItem(themeKey)||'dark');
-toggle.addEventListener('click',()=>{
- const next=document.body.classList.contains('light')?'dark':'light';
- localStorage.setItem(themeKey,next);
- applyTheme(next);
-});
-</script>
 <script src="../../View Controller/mobileNavViewModel.js"></script>
     <script src="../../View Controller/themeViewModel.js"></script>
     <script src="../../View Controller/scrollControlsViewModel.js"></script>
