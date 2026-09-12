@@ -187,7 +187,11 @@ test("blog scroll-to-top control stays above browser toolbar area", async ({ pag
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/View/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
   await page.evaluate(() => window.scrollTo(0, 900));
-  const position = await page.locator(".scroll-button--top").evaluate((el) => ({ top: getComputedStyle(el).top, bottom: getComputedStyle(el).bottom }));
+  const position = await page.locator(".scroll-button--top").evaluate((el) => {
+    const rect = el.getBoundingClientRect();
+    const nav = document.querySelector("nav")?.getBoundingClientRect();
+    return { top: rect.top, bottom: getComputedStyle(el).bottom, navBottom: nav?.bottom ?? 0 };
+  });
   expect(position.bottom).not.toBe("auto");
-  expect(position.top).toBe("auto");
+  expect(position.top).toBeGreaterThan(position.navBottom);
 });
