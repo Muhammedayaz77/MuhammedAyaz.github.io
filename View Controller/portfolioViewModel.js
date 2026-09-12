@@ -163,7 +163,17 @@ const PortfolioViewModel = {
                 status.textContent = "Message sent successfully. Thank you!";
                 form.reset();
             } catch (error) {
-                status.textContent = `Online submission failed. Please email ${PortfolioModel.profile.email} directly.`;
+                status.textContent = "Online submission could not be completed. You can use your mail app instead.";
+                status.classList.add("is-visible");
+                let fallback = status.querySelector(".contact-fallback");
+                if (!fallback) {
+                    fallback = document.createElement("a");
+                    fallback.className = "btn btn-secondary contact-fallback";
+                    fallback.href = `mailto:${PortfolioModel.profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\\nReply email: ${email}\\n\\n${message}`)}`;
+                    fallback.textContent = "Open Mail App →";
+                    fallback.setAttribute("aria-label", "Open your mail app to send the message");
+                    status.appendChild(fallback);
+                }
             } finally {
                 if (submitButton) { submitButton.disabled = false; submitButton.textContent = "Send Message →"; }
             }
