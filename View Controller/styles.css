@@ -29,3 +29,7 @@ section:not(.hero){content-visibility:auto;contain-intrinsic-size:800px}
   .btn{min-height:54px}
   .buttons{gap:12px}
 }
+
+/* Performance-safe rendering: keep above-the-fold content immediate and defer off-screen sections. */
+section:not(.hero){content-visibility:auto;contain-intrinsic-size:720px}
+img{content-visibility:auto}
