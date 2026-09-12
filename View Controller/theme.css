@@ -235,3 +235,46 @@ img, video, iframe { max-width: 100%; }
   .skills, .buttons, .project-actions, .blog-filters { width: 100%; }
   .skill { max-width: 100%; }
 }
+
+/* Premium mobile navigation */
+.mobile-menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(.5); }
+.mobile-menu-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 54px;
+  padding: 14px 16px !important;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  font-size: 16px;
+  letter-spacing: -.1px;
+}
+.mobile-menu a::before {
+  content: attr(data-menu-index);
+  min-width: 26px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--brand);
+  opacity: .75;
+}
+.mobile-menu a::after {
+  content: "→";
+  margin-left: auto;
+  color: var(--subtle);
+  transition: transform .2s ease, color .2s ease;
+}
+.mobile-menu a:hover::after,
+.mobile-menu a:focus-visible::after { color: var(--brand); transform: translateX(3px); }
+.mobile-menu-toggle:focus-visible,
+.theme-toggle:focus-visible,
+.mobile-menu a:focus-visible,
+.btn:focus-visible,
+.blog-filter:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
