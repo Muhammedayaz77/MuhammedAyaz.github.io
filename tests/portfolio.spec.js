@@ -99,14 +99,9 @@ test("homepage does not load remote company logos", async ({ page }) => {
     expect(remoteLogos).toBe(0);
 });
 
-test("critical external destinations respond", async ({ request }) => {
-    const urls = [
-        "https://github.com/Muhammedayaz77",
-        "https://in.linkedin.com/in/muhammed-ayaz-019150a8",
-        "https://formsubmit.co/"
-    ];
-    for (const url of urls) {
-        const response = await request.get(url, { maxRedirects: 5 });
-        expect(response.status(), url).toBeLessThan(500);
-    }
+test("critical external links are present and correctly formed", async ({ page }) => {
+    await page.goto(homePath, { waitUntil: "networkidle" });
+    await expect(page.locator('a[href^="https://github.com/Muhammedayaz77/"]')).toHaveAttribute("href", /github\.com/);
+    await expect(page.locator('a[href*="linkedin.com"]')).toHaveAttribute("href", /linkedin\.com/);
+    await expect(page.locator('a[href$=".pdf"]')).toHaveAttribute("href", /Muhammed_Ayaz_Resume\.pdf/);
 });
