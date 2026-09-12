@@ -3,7 +3,7 @@ const PortfolioModel = Object.freeze({
         name: "Muhammed Ayaz",
         role: "Lead iOS Developer",
         experience: "12+ years",
-        email: "muhammedayaz77@gmail.com",
+        email: "ayaz.job2010@gmail.com",
         github: "https://github.com/Muhammedayaz77",
         linkedIn: "https://in.linkedin.com/in/muhammed-ayaz-019150a8",
         availability: "Open to senior / lead iOS opportunities"
