@@ -353,3 +353,67 @@ body.light .blog-card a,
 body.light .project-back {
   color: var(--theme-brand) !important;
 }
+
+
+/* Final mobile header alignment contract
+   Keep the theme and menu controls identical in footprint and centered.
+   The theme glyph must not inherit a full-height surface from generic theme-icon rules. */
+@media (max-width: 900px) {
+  nav .nav-tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: auto;
+    min-width: 0;
+  }
+  nav .theme-toggle,
+  nav .mobile-menu-toggle {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px;
+    min-height: 46px;
+    padding: 0 !important;
+    margin: 0;
+    flex: 0 0 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  nav .theme-toggle .theme-icon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    min-height: 40px;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border-radius: 12px;
+    line-height: 1;
+    font-size: 23px;
+  }
+  nav .theme-toggle .theme-label {
+    display: none !important;
+  }
+  nav .mobile-menu-toggle {
+    gap: 5px;
+  }
+  nav .mobile-menu-toggle span {
+    width: 19px;
+    height: 2px;
+    margin: 0;
+  }
+}
+@media (max-width: 600px) {
+  nav {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  nav .nav-tools {
+    gap: 9px;
+  }
+}
