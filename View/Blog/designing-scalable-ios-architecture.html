@@ -73,9 +73,9 @@ const key='portfolioTheme';const body=document.body;const toggle=document.getEle
 function applyTheme(theme){const light=theme==='light';body.classList.toggle('light',light);icon.textContent=light?'🌙':'☀️';label.textContent=light?'Light':'Dark';hint.textContent=light?'Dark if White Theme':'Switch to Light Theme';toggle.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');localStorage.setItem(key,theme)}
 applyTheme(localStorage.getItem(key)||'dark');toggle.addEventListener('click',()=>applyTheme(body.classList.contains('light')?'dark':'light'));
 </script>
+<script src="../../View Controller/mobileNavViewModel.js"></script>
     <script src="../../View Controller/themeViewModel.js"></script>
     <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
-<script src="../../View Controller/mobileNavViewModel.js"></script>
 </body>
 </html>
