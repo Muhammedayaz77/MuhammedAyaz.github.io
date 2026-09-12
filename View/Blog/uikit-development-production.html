@@ -13,7 +13,7 @@
 		.wrap { width: min(1120px, 92%); margin: auto; }
 		nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.08); }
 		.logo { font-size: 23px; font-weight: 800; }
-		.logo span { color: #a78bfa; }
+		.logo span { color: var(--brand); }
 		.nav-tools { display: flex; align-items: flex-end; gap: 14px; }
 		.nav-back { font-size: 14px; color: #aeb0c0; margin-bottom: 10px; }
 		.theme-area { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
@@ -23,9 +23,9 @@
 		.theme-label { font-size: 12px; font-weight: 700; min-width: 55px; text-align: center; }
 		.hero { padding: 90px 0 55px; position: relative; overflow: hidden; }
 		.hero:before { content: ""; position: absolute; width: 520px; height: 520px; right: 2%; top: 10px; background: #7c3aed; filter: blur(190px); opacity: .16; }
-		.eyebrow { display: inline-block; padding: 7px 13px; border: 1px solid rgba(168,85,247,.45); border-radius: 30px; color: #c4b5fd; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+		.eyebrow { display: inline-block; padding: 7px 13px; border: 1px solid rgba(168,85,247,.45); border-radius: 30px; color: var(--brand); font-size: 12px; font-weight: 800; letter-spacing: 1px; }
 		.hero h1 { font-size: clamp(44px, 6.7vw, 78px); line-height: 1.05; letter-spacing: -3px; max-width: 930px; margin: 22px 0; }
-		.hero h1 span { background: linear-gradient(90deg,#8b5cf6,#ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+		.hero h1 span { background: linear-gradient(90deg,var(--brand),#8af3d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 		.hero p { color: #aeb0c0; max-width: 820px; font-size: 18px; }
 		.meta { display: flex; gap: 12px; flex-wrap: wrap; color: #85899b; font-size: 13px; margin-top: 24px; }
 		.layout { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 52px; align-items: start; padding: 55px 0 100px; }
@@ -36,12 +36,12 @@
 		.article p { color: #c0c2cd; margin: 0 0 18px; }
 		.article ul { padding-left: 22px; color: #c0c2cd; margin: 0 0 20px; }
 		.article li { margin: 7px 0; }
-		.quote { border-left: 3px solid #a78bfa; background: #0f1020; padding: 20px 22px; margin: 28px 0; border-radius: 0 16px 16px 0; color: #eef0f7; font-size: 20px; }
+		.quote { border-left: 3px solid var(--brand); background: #0f1020; padding: 20px 22px; margin: 28px 0; border-radius: 0 16px 16px 0; color: #eef0f7; font-size: 20px; }
 		.callout { background: linear-gradient(135deg,rgba(99,102,241,.14),rgba(168,85,247,.08)); border: 1px solid rgba(139,92,246,.24); border-radius: 18px; padding: 24px; margin: 28px 0; }
 		.callout strong { font-size: 22px; }
 		.link-card { display: block; background: #10111d; border: 1px solid rgba(139,92,246,.3); border-radius: 18px; padding: 24px; margin: 25px 0; transition: .3s; }
 		.link-card:hover { transform: translateY(-3px); border-color: rgba(167,139,250,.7); }
-		.link-card .small { font-size: 12px; color: #a78bfa; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+		.link-card .small { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
 		.link-card h3 { margin: 7px 0; font-size: 22px; }
 		.footer { border-top: 1px solid rgba(255,255,255,.08); padding: 35px 0; color: #7f8292; text-align: center; }
 		body.light { background: #f7f8fc; color: #111827; }
