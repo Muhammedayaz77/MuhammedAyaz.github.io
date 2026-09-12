@@ -167,3 +167,27 @@ test("homepage does not load remote company logos", async ({ page }) => {
   );
   expect(remoteLogos).toBe(0);
 });
+
+
+test("blog theme toggle works without double-binding", async ({ page }) => {
+  await page.goto("/View/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
+  await page.evaluate(() => localStorage.setItem("portfolioTheme", "dark"));
+  await page.reload({ waitUntil: "networkidle" });
+  const toggle = page.locator("#themeToggle");
+  await expect(page.locator("body")).not.toHaveClass(/light/);
+  await toggle.click();
+  await expect(page.locator("body")).toHaveClass(/light/);
+  await expect(page.locator("#themeLabel")).toHaveText("Light");
+  await toggle.click();
+  await expect(page.locator("body")).not.toHaveClass(/light/);
+  await expect(page.locator("#themeLabel")).toHaveText("Dark");
+});
+
+test("blog scroll-to-top control stays above browser toolbar area", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/View/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
+  await page.evaluate(() => window.scrollTo(0, 900));
+  const position = await page.locator(".scroll-button--top").evaluate((el) => ({ top: getComputedStyle(el).top, bottom: getComputedStyle(el).bottom }));
+  expect(position.bottom).not.toBe("auto");
+  expect(position.top).toBe("auto");
+});
