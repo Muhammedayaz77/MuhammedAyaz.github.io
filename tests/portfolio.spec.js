@@ -17,6 +17,8 @@ const pages = [
 
 test("all portfolio pages render without browser errors", async ({ page }) => {
   for (const path of pages) {
+    page.removeAllListeners("console");
+    page.removeAllListeners("pageerror");
     const errors = [];
     page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
     page.on("pageerror", (error) => errors.push(error.message));
@@ -63,6 +65,7 @@ test("core recruiter actions and contact configuration are correct", async ({ pa
 
 test("theme toggle persists and cycles correctly", async ({ page }) => {
   await page.goto(homePath, { waitUntil: "networkidle" });
+  await page.evaluate(() => localStorage.removeItem("portfolioTheme"));
   const toggle = page.locator("#themeToggle");
   await toggle.click();
   await expect(page.locator("body")).toHaveClass(/light/);
@@ -76,7 +79,7 @@ test("blog search and filters work", async ({ page }) => {
   await search.fill("Swift Concurrency");
   await expect(page.locator('[data-blog-card]').filter({ hasText: "Swift Concurrency" })).toBeVisible();
   await page.getByRole("button", { name: "Performance" }).click();
-  await expect(page.locator('[data-blog-card][hidden]')).toHaveCount(5);
+  await expect(page.locator('[data-blog-card][hidden]')).toHaveCount(6);
 });
 
 test("all pages pass serious accessibility smoke audit", async ({ page }) => {
