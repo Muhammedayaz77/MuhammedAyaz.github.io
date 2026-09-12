@@ -304,3 +304,14 @@ img, video, iframe { max-width: 100%; }
   outline: 2px solid var(--brand);
   outline-offset: 3px;
 }
+
+/* Light-theme legacy selector override: keep secondary buttons on theme tokens. */
+body.light .btn-secondary,
+body.light .btn-secondary:active,
+body.light .btn-secondary:focus,
+body.light .btn-secondary:hover {
+  background: var(--theme-surface-2) !important;
+  border-color: var(--theme-line-strong) !important;
+  color: var(--theme-heading) !important;
+  -webkit-text-fill-color: var(--theme-heading) !important;
+}
