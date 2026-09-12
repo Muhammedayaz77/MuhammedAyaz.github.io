@@ -169,18 +169,27 @@ test("homepage does not load remote company logos", async ({ page }) => {
 });
 
 
-test("blog theme toggle works without double-binding", async ({ page }) => {
-  await page.goto("/View/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
-  await page.evaluate(() => localStorage.setItem("portfolioTheme", "dark"));
-  await page.reload({ waitUntil: "networkidle" });
-  const toggle = page.locator("#themeToggle");
-  await expect(page.locator("body")).not.toHaveClass(/light/);
-  await toggle.click();
-  await expect(page.locator("body")).toHaveClass(/light/);
-  await expect(page.locator("#themeLabel")).toHaveText("Light");
-  await toggle.click();
-  await expect(page.locator("body")).not.toHaveClass(/light/);
-  await expect(page.locator("#themeLabel")).toHaveText("Dark");
+test("every blog page theme toggle works without double-binding", async ({ page }) => {
+  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/") && !path.endsWith("/index.html"));
+  for (const path of blogPages) {
+    await page.goto(path, { waitUntil: "networkidle" });
+    await page.evaluate(() => {
+      localStorage.setItem("portfolioTheme", "dark");
+      localStorage.removeItem("theme");
+    });
+    await page.reload({ waitUntil: "networkidle" });
+    const toggle = page.locator("#themeToggle");
+    await expect(toggle, path).toHaveCount(1);
+    await expect(page.locator("body"), path).not.toHaveClass(/light/);
+    await toggle.click();
+    await expect(page.locator("body"), path).toHaveClass(/light/);
+    await expect(page.locator("#themeLabel"), path).toHaveText("Light");
+    await expect(page.locator("body"), path).toHaveCSS("background-color", "rgb(244, 250, 247)");
+    await toggle.click();
+    await expect(page.locator("body"), path).not.toHaveClass(/light/);
+    await expect(page.locator("#themeLabel"), path).toHaveText("Dark");
+    await expect(page.locator("body"), path).toHaveCSS("background-color", "rgb(7, 19, 15)");
+  }
 });
 
 test("blog scroll-to-top control stays above browser toolbar area", async ({ page }) => {
