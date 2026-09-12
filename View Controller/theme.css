@@ -365,7 +365,7 @@ body.light .project-back {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 14px;
     margin-left: auto;
     min-width: 0;
   }
@@ -416,6 +416,6 @@ body.light .project-back {
     padding-right: 12px;
   }
   nav .nav-tools {
-    gap: 9px;
+    gap: 14px;
   }
 }
