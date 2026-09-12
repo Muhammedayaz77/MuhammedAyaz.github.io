@@ -103,5 +103,5 @@ test("critical external links are present and correctly formed", async ({ page }
     await page.goto(homePath, { waitUntil: "networkidle" });
     await expect(page.locator('a[href^="https://github.com/Muhammedayaz77/"]').first()).toHaveAttribute("href", /github\.com/);
     await expect(page.locator('a[href*="linkedin.com"]')).toHaveAttribute("href", /linkedin\.com/);
-    await expect(page.locator('a[href$=".pdf"]')).toHaveAttribute("href", /Muhammed_Ayaz_Resume\.pdf/);
+    await expect(page.locator('a[href$=".pdf"]').first()).toHaveAttribute("href", /Muhammed_Ayaz_Resume\.pdf/);
 });
