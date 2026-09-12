@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const { AxeBuilder } = require("@axe-core/playwright");
 
-const homePath = "/MuhammedAyaz.github.io/View/home.html";
+const homePath = "/View/home.html";
 
 test("homepage renders without browser console errors", async ({ page }) => {
     const errors = [];
