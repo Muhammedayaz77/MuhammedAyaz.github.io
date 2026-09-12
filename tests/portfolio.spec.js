@@ -67,7 +67,11 @@ test("mobile layout has no horizontal overflow", async ({ page }) => {
     await page.goto(homePath, { waitUntil: "networkidle" });
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
-    await expect(page.locator(".nav-button")).toBeVisible();
+    await expect(page.locator("#mobileMenuToggle")).toBeVisible();
+    await page.locator("#mobileMenuToggle").click();
+    await expect(page.locator("#portfolioMobileMenu")).toHaveClass(/is-open/);
+    await page.locator("body").click({ position: { x: 10, y: 400 } });
+    await expect(page.locator("#portfolioMobileMenu")).not.toHaveClass(/is-open/);
 });
 
 test("homepage stays within basic performance budgets", async ({ page }) => {
@@ -77,6 +81,22 @@ test("homepage stays within basic performance budgets", async ({ page }) => {
     const transferBytes = await page.evaluate(() => performance.getEntriesByType("resource").reduce((total, entry) => total + (entry.transferSize || 0), 0));
     expect(loadMs).toBeLessThan(5000);
     expect(transferBytes).toBeLessThan(3_000_000);
+});
+
+test("contact configuration uses the intended destination without exposing it in the page", async ({ page }) => {
+    await page.goto(homePath, { waitUntil: "networkidle" });
+    const model = await page.evaluate(async () => {
+        const response = await fetch("../Models/portfolioModel.js");
+        return response.text();
+    });
+    expect(model).toContain('email: "ayaz.job2010@gmail.com"');
+    await expect(page.locator("#contactForm")).toBeVisible();
+});
+
+test("homepage does not load remote company logos", async ({ page }) => {
+    await page.goto(homePath, { waitUntil: "networkidle" });
+    const remoteLogos = await page.locator(".company-logo").evaluateAll((items) => items.filter((item) => item.tagName === "IMG" && item.src.startsWith("http")).length);
+    expect(remoteLogos).toBe(0);
 });
 
 test("critical external destinations respond", async ({ request }) => {
