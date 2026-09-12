@@ -315,3 +315,41 @@ body.light .btn-secondary:hover {
   color: var(--theme-heading) !important;
   -webkit-text-fill-color: var(--theme-heading) !important;
 }
+
+/* Explicit opaque surfaces for light mode. */
+body.light .card,
+body.light .skill-group,
+body.light .about-box,
+body.light .project-panel,
+body.light .blog-index-card,
+body.light .article-nav-card,
+body.light .related-card,
+body.light .question,
+body.light .toc,
+body.light .link-card {
+  background-color: var(--theme-surface) !important;
+  background-image: none !important;
+  color: var(--theme-heading) !important;
+}
+body.light .card h3,
+body.light .skill-group h3,
+body.light .project-panel h3,
+body.light .blog-index-card strong,
+body.light .question h2,
+body.light .link-card h3 {
+  color: var(--theme-heading) !important;
+}
+body.light .card p,
+body.light .project-panel p,
+body.light .blog-index-card small,
+body.light .question p,
+body.light .project-hero p,
+body.light .section-description {
+  color: var(--theme-muted) !important;
+}
+body.light .blog-label,
+body.light .company-link,
+body.light .blog-card a,
+body.light .project-back {
+  color: var(--theme-brand) !important;
+}
