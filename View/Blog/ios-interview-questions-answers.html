@@ -13,7 +13,7 @@
 		.wrap { width: min(1120px, 92%); margin: auto; }
 		nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.08); }
 		.logo { font-size: 23px; font-weight: 800; }
-		.logo span { color: #a78bfa; }
+		.logo span { color: var(--brand); }
 		.nav-tools { display: flex; align-items: flex-end; gap: 14px; }
 		.nav-back { font-size: 14px; color: #aeb0c0; margin-bottom: 10px; }
 		.theme-area { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
@@ -23,16 +23,16 @@
 		.theme-label { font-size: 12px; font-weight: 700; min-width: 55px; text-align: center; }
 		.hero { padding: 82px 0 48px; position: relative; overflow: hidden; }
 		.hero:before { content: ""; position: absolute; width: 520px; height: 520px; right: 2%; top: 10px; background: #7c3aed; filter: blur(190px); opacity: .16; }
-		.eyebrow { display: inline-block; padding: 7px 13px; border: 1px solid rgba(168,85,247,.45); border-radius: 30px; color: #c4b5fd; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+		.eyebrow { display: inline-block; padding: 7px 13px; border: 1px solid rgba(168,85,247,.45); border-radius: 30px; color: var(--brand); font-size: 12px; font-weight: 800; letter-spacing: 1px; }
 		.hero h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.05; letter-spacing: -3px; max-width: 930px; margin: 22px 0; }
-		.hero h1 span { background: linear-gradient(90deg,#8b5cf6,#ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+		.hero h1 span { background: linear-gradient(90deg,var(--brand),#8af3d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 		.hero p { color: #aeb0c0; max-width: 850px; font-size: 18px; }
 		.meta { display: flex; gap: 12px; flex-wrap: wrap; color: #85899b; font-size: 13px; margin-top: 24px; }
 		.questions { padding: 30px 0 100px; }
 		.question { background: #10111d; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 23px 25px; margin: 17px 0; transition: .25s; }
 		.question:hover { border-color: rgba(167,139,250,.35); transform: translateY(-1px); }
 		.question h2 { font-size: 19px; line-height: 1.4; margin-bottom: 10px; }
-		.question h2 .number { color: #a78bfa; margin-right: 7px; }
+		.question h2 .number { color: var(--brand); margin-right: 7px; }
 		.question p { color: #c0c2cd; }
 		.question strong { color: #f0eefb; }
 		.footer { border-top: 1px solid rgba(255,255,255,.08); padding: 35px 0; color: #7f8292; text-align: center; }
