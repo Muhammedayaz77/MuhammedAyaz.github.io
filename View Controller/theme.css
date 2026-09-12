@@ -419,3 +419,51 @@ body.light .project-back {
     gap: 14px;
   }
 }
+
+
+/* Blog pages contain legacy page-local light selectors. These final
+   high-specificity rules keep the centralized theme contract authoritative. */
+html body.light {
+  background: var(--theme-bg) !important;
+  color: var(--theme-text) !important;
+}
+body.light nav {
+  background: var(--glass) !important;
+  border-color: var(--line) !important;
+}
+body.light .theme-toggle,
+body.light .mobile-menu-toggle {
+  background: var(--surface-2) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+body.light .theme-icon {
+  background: var(--surface-3) !important;
+  color: var(--text) !important;
+}
+body.light .hero:before {
+  background: radial-gradient(circle, var(--theme-brand-glow-strong) 0%, var(--theme-brand-glow-soft) 38%, transparent 72%) !important;
+  opacity: 1 !important;
+}
+body.light .hero p,
+body.light .article p,
+body.light .article ul,
+body.light .question p {
+  color: var(--muted) !important;
+}
+body.light .question,
+body.light .toc,
+body.light .quote,
+body.light .callout,
+body.light .link-card {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+}
+body.light .toc a,
+body.light .meta,
+body.light .nav-back,
+body.light .theme-hint,
+body.light .footer {
+  color: var(--muted) !important;
+}
