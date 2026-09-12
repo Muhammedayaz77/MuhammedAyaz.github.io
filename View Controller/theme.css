@@ -31,25 +31,25 @@
   --theme-brand-glow-soft: rgba(52, 214, 163, .08);
 
   /* semantic aliases — components should use these instead of raw colors */
-  --bg: var(--theme-bg);
-  --surface: var(--theme-surface);
-  --surface-2: var(--theme-surface-2);
-  --surface-3: var(--theme-surface-3);
-  --text: var(--theme-text);
-  --heading: var(--theme-heading);
-  --muted: var(--theme-muted);
-  --subtle: var(--theme-subtle);
-  --brand: var(--theme-brand);
-  --brand-2: var(--theme-brand-strong);
-  --brand-soft: var(--theme-brand-soft);
-  --on-brand: var(--theme-on-brand);
-  --line: var(--theme-line);
-  --line-strong: var(--theme-line-strong);
-  --glow: var(--theme-glow);
-  --overlay: var(--theme-overlay);
-  --glass: var(--theme-glass);
-  --code-bg: var(--theme-code);
-  --shadow-color: var(--theme-shadow);
+  --bg: #f4faf7;
+  --surface: #ffffff;
+  --surface-2: #edf6f2;
+  --surface-3: #e4f0eb;
+  --text: #10201b;
+  --heading: #10201b;
+  --muted: #30463e;
+  --subtle: #70827c;
+  --brand: #056044;
+  --brand-2: #075a43;
+  --brand-soft: #16866a;
+  --on-brand: #ffffff;
+  --line: #d7e7e0;
+  --line-strong: #bfd8ce;
+  --glow: rgba(21, 154, 115, .13);
+  --overlay: rgba(255, 255, 255, .90);
+  --glass: rgba(255, 255, 255, .92);
+  --code-bg: #f1f6f4;
+  --shadow-color: rgba(18, 60, 48, .12);
 }
 
 body.light {
