@@ -223,31 +223,7 @@
 		<footer class="footer">© Muhammed Ayaz • iOS Development</footer>
 	</div>
 
-	<script>
-		(function () {
-			const body = document.body;
-			const toggle = document.getElementById("themeToggle");
-			const icon = document.getElementById("themeIcon");
-			const label = document.getElementById("themeLabel");
-			const hint = document.getElementById("themeHint");
-			const savedTheme = localStorage.getItem("theme");
-
-			function applyTheme(theme) {
-				const isLight = theme === "light";
-				body.classList.toggle("light", isLight);
-				icon.textContent = isLight ? "🌙" : "☀️";
-				label.textContent = isLight ? "Classic" : "Light";
-				hint.textContent = isLight ? "Switch to Light Theme" : "Dark if White Theme";
-				localStorage.setItem("theme", theme);
-			}
-
-			applyTheme(savedTheme === "light" ? "light" : "dark");
-			toggle.addEventListener("click", function () {
-				applyTheme(body.classList.contains("light") ? "dark" : "light");
-			});
-		})();
-	</script>
-<script src="../../View Controller/mobileNavViewModel.js"></script>
+	<script src="../../View Controller/mobileNavViewModel.js"></script>
     <script src="../../View Controller/themeViewModel.js"></script>
     <script src="../../View Controller/scrollControlsViewModel.js"></script>
     <script src="blogViewController.js"></script>
