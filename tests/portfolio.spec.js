@@ -65,7 +65,8 @@ test("core recruiter actions and contact configuration are correct", async ({ pa
 
 test("theme toggle persists and cycles correctly", async ({ page }) => {
   await page.goto(homePath, { waitUntil: "networkidle" });
-  await page.evaluate(() => localStorage.removeItem("portfolioTheme"));
+  await page.evaluate(() => localStorage.setItem("portfolioTheme", "dark"));
+  await page.reload({ waitUntil: "networkidle" });
   const toggle = page.locator("#themeToggle");
   await toggle.click();
   await expect(page.locator("body")).toHaveClass(/light/);
