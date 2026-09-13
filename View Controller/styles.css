@@ -12,7 +12,7 @@ section:not(.hero){content-visibility:auto;contain-intrinsic-size:800px}
 .contact-form .btn{width:100%;min-height:56px}
 .contact-status{min-height:20px}
 .contact-status.is-visible{padding:10px 2px}
-.scroll-button--top{top:100px}
+.scroll-button--top{top:calc(16px + 80px + 20px)}
 .scroll-button--bottom{bottom:24px}
 @media(max-width:900px){
   .nav-tools{gap:10px}
@@ -24,7 +24,7 @@ section:not(.hero){content-visibility:auto;contain-intrinsic-size:800px}
   .contact-grid{gap:12px}
   .contact-form input,.contact-form textarea{padding:15px}
   .contact-form textarea{min-height:170px}
-  .scroll-button--top{top:92px}
+  .scroll-button--top{top:calc(10px + 80px + 18px)}
   .scroll-button--bottom{bottom:18px}
   .btn{min-height:54px}
   .buttons{gap:12px}
