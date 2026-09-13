@@ -113,6 +113,49 @@ const PortfolioViewModel = {
         }));
     },
 
+    initializeBlogReturnNavigation() {
+        const blogLinks = [...document.querySelectorAll('a[href^="Blog/"]')];
+        if (blogLinks.length === 0) return;
+
+        const stateKey = "portfolioBlogReturnState";
+        const saveState = () => {
+            sessionStorage.setItem(stateKey, JSON.stringify({
+                href: window.location.href,
+                scrollY: Math.round(window.scrollY || document.documentElement.scrollTop || 0),
+                search: document.getElementById("blogSearch")?.value || "",
+                filter: document.querySelector("[data-blog-filter].is-active")?.dataset.blogFilter || "all"
+            }));
+        };
+
+        blogLinks.forEach((link) => link.addEventListener("click", saveState));
+
+        const restoreState = () => {
+            let saved;
+            try {
+                saved = JSON.parse(sessionStorage.getItem(stateKey) || "null");
+            } catch {
+                saved = null;
+            }
+            if (!saved || saved.href !== window.location.href) return;
+
+            const searchInput = document.getElementById("blogSearch");
+            if (searchInput && saved.search) {
+                searchInput.value = saved.search;
+                searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+            }
+
+            const filterButton = document.querySelector(`[data-blog-filter="${CSS.escape(saved.filter || "all")}"]`);
+            if (filterButton && saved.filter && saved.filter !== "all") filterButton.click();
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => window.scrollTo({ top: saved.scrollY || 0, left: 0, behavior: "auto" }));
+            });
+        };
+
+        window.addEventListener("pageshow", restoreState);
+        window.addEventListener("popstate", restoreState);
+    },
+
     initializeResumeViewer() {
         const modal = document.getElementById("resumeModal");
         const openButton = document.getElementById("viewResumeButton");
@@ -193,6 +236,7 @@ const PortfolioViewModel = {
         this.initializeRecruiterSkills();
         this.initializeSEO();
         this.initializeBlogSearch();
+        this.initializeBlogReturnNavigation();
         this.initializeResumeViewer();
         this.initializeContactForm();
         this.initializeNavigation();
