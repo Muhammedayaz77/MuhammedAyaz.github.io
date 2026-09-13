@@ -114,46 +114,45 @@ const PortfolioViewModel = {
     },
 
     initializeBlogReturnNavigation() {
+        const stateKey = "portfolioBlogReturnState";
         const blogLinks = [...document.querySelectorAll('a[href^="Blog/"]')];
         if (blogLinks.length === 0) return;
 
-        const stateKey = "portfolioBlogReturnState";
         const saveState = () => {
+            const searchInput = document.getElementById("blogSearch");
+            const activeFilter = document.querySelector("[data-blog-filter].is-active")?.dataset.blogFilter || "all";
             sessionStorage.setItem(stateKey, JSON.stringify({
-                href: window.location.href,
+                url: window.location.href,
                 scrollY: Math.round(window.scrollY || document.documentElement.scrollTop || 0),
-                search: document.getElementById("blogSearch")?.value || "",
-                filter: document.querySelector("[data-blog-filter].is-active")?.dataset.blogFilter || "all"
+                search: searchInput?.value || "",
+                filter: activeFilter
             }));
         };
 
         blogLinks.forEach((link) => link.addEventListener("click", saveState));
 
         const restoreState = () => {
-            let saved;
-            try {
-                saved = JSON.parse(sessionStorage.getItem(stateKey) || "null");
-            } catch {
-                saved = null;
-            }
-            if (!saved || saved.href !== window.location.href) return;
+            let saved = null;
+            try { saved = JSON.parse(sessionStorage.getItem(stateKey) || "null"); } catch (_) { return; }
+            if (!saved || saved.url !== window.location.href) return;
 
             const searchInput = document.getElementById("blogSearch");
-            if (searchInput && saved.search) {
-                searchInput.value = saved.search;
+            if (searchInput && searchInput.value !== saved.search) {
+                searchInput.value = saved.search || "";
                 searchInput.dispatchEvent(new Event("input", { bubbles: true }));
             }
 
-            const filterButton = document.querySelector(`[data-blog-filter="${CSS.escape(saved.filter || "all")}"]`);
-            if (filterButton && saved.filter && saved.filter !== "all") filterButton.click();
+            const filter = saved.filter || "all";
+            const filterButton = [...document.querySelectorAll("[data-blog-filter]")].find((button) => (button.dataset.blogFilter || "all") === filter);
+            if (filterButton && filter !== "all" && !filterButton.classList.contains("is-active")) filterButton.click();
 
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => window.scrollTo({ top: saved.scrollY || 0, left: 0, behavior: "auto" }));
+                requestAnimationFrame(() => window.scrollTo(0, saved.scrollY || 0));
             });
         };
 
         window.addEventListener("pageshow", restoreState);
-        window.addEventListener("popstate", restoreState);
+        document.addEventListener("DOMContentLoaded", restoreState, { once: true });
     },
 
     initializeResumeViewer() {
