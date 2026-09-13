@@ -215,3 +215,13 @@ test("blog article navigation returns to the portfolio blog section", async ({ p
   await expect(page).toHaveURL(/\/View\/home\.html#blog$/);
   await expect(page.locator("#blog")).toBeVisible();
 });
+
+
+test("blog pages do not reference missing controller scripts", async ({ page }) => {
+  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/"));
+  for (const path of blogPages) {
+    await page.goto(path, { waitUntil: "networkidle" });
+    const missingScripts = await page.evaluate(() => [...document.scripts].map(s => s.src).filter(src => src.includes("blogViewController.js")));
+    expect(missingScripts, path).toEqual([]);
+  }
+});
