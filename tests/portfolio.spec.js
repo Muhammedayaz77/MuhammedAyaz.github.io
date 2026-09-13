@@ -4,7 +4,6 @@ const { AxeBuilder } = require("@axe-core/playwright");
 const homePath = "/View/home.html";
 const pages = [
   "/View/home.html",
-  "/View/Blog/index.html",
   "/View/Blog/designing-scalable-ios-architecture.html",
   "/View/Blog/swift-concurrency.html",
   "/View/Blog/ios-performance.html",
@@ -170,7 +169,7 @@ test("homepage does not load remote company logos", async ({ page }) => {
 
 
 test("every blog page theme toggle works without double-binding", async ({ page }) => {
-  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/") && !path.endsWith("/index.html"));
+  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/"));
   for (const path of blogPages) {
     await page.goto(path, { waitUntil: "networkidle" });
     await page.evaluate(() => {
@@ -203,4 +202,16 @@ test("blog scroll-to-top control stays above browser toolbar area", async ({ pag
   });
   expect(position.bottom).not.toBe("auto");
   expect(position.top).toBeGreaterThan(position.navBottom);
+});
+
+
+test("blog article navigation returns to the portfolio blog section", async ({ page }) => {
+  await page.goto(homePath, { waitUntil: "networkidle" });
+  await page.locator("#blog").scrollIntoViewIfNeeded();
+  const article = page.locator('a[href="Blog/swift-concurrency.html"]').first();
+  await article.click();
+  await expect(page).toHaveURL(/\/View\/Blog\/swift-concurrency\.html$/);
+  await page.getByRole("link", { name: /Back to Blog/ }).click();
+  await expect(page).toHaveURL(/\/View\/home\.html#blog$/);
+  await expect(page.locator("#blog")).toBeVisible();
 });
