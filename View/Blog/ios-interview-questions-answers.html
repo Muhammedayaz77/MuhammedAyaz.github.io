@@ -57,7 +57,8 @@
 			.hero h1 { letter-spacing: -2px; }
 			.question { padding: 20px; }
 		}
-	</style>
+	 .question{content-visibility:auto;contain-intrinsic-size:0 180px}
+</style>
     <link rel="stylesheet" href="blog.css">
     <link rel="stylesheet" href="../../View Controller/theme.css">
 </head>
@@ -202,10 +203,7 @@
 			questions.appendChild(section);
 		});
 	</script>
-
-	<script src="../../View Controller/mobileNavViewModel.js"></script>
-    <script src="../../View Controller/themeViewModel.js"></script>
-    <script src="../../View Controller/scrollControlsViewModel.js"></script>
-    <script src="blogViewController.js"></script>
+    <script defer src="../../View Controller/themeViewModel.js"></script>
+    <script defer src="../../View Controller/scrollControlsViewModel.js"></script>
 </body>
 </html>
