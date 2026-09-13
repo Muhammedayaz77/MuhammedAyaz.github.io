@@ -1,6 +1,7 @@
 const ScrollControlsViewModel = {
     topThreshold: 8,
     bottomThreshold: 8,
+    framePending: false,
 
     getScrollElement() {
         return document.scrollingElement || document.documentElement;
@@ -27,6 +28,15 @@ const ScrollControlsViewModel = {
         const { atTop, atBottom } = this.getState();
         topButton.classList.toggle("is-hidden", atTop);
         bottomButton.classList.toggle("is-hidden", atBottom);
+    },
+
+    scheduleUpdate(topButton, bottomButton) {
+        if (this.framePending) return;
+        this.framePending = true;
+        window.requestAnimationFrame(() => {
+            this.framePending = false;
+            this.update(topButton, bottomButton);
+        });
     },
 
     scrollToTop() {
@@ -56,47 +66,30 @@ const ScrollControlsViewModel = {
     },
 
     initialize() {
-        if (document.getElementById("scrollControls")) {
-            return;
-        }
+        if (document.getElementById("scrollControls")) return;
 
         const controls = document.createElement("div");
         controls.id = "scrollControls";
         controls.className = "scroll-controls";
         controls.setAttribute("aria-label", "Page scroll controls");
 
-        const topButton = this.createButton(
-            "Scroll to top",
-            "scroll-button--top",
-            "↑",
-            () => this.scrollToTop()
-        );
-
-        const bottomButton = this.createButton(
-            "Scroll to bottom",
-            "scroll-button--bottom",
-            "↓",
-            () => this.scrollToBottom()
-        );
+        const topButton = this.createButton("Scroll to top", "scroll-button--top", "↑", () => this.scrollToTop());
+        const bottomButton = this.createButton("Scroll to bottom", "scroll-button--bottom", "↓", () => this.scrollToBottom());
 
         controls.append(topButton, bottomButton);
         document.body.appendChild(controls);
 
-        const update = () => {
-            window.requestAnimationFrame(() => this.update(topButton, bottomButton));
-        };
+        const update = () => this.scheduleUpdate(topButton, bottomButton);
 
         window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
+        window.addEventListener("resize", update, { passive: true });
         window.addEventListener("pageshow", update);
         window.addEventListener("load", update);
-        document.addEventListener("DOMContentLoaded", update);
-
         if (window.visualViewport) {
-            window.visualViewport.addEventListener("resize", update);
+            window.visualViewport.addEventListener("resize", update, { passive: true });
         }
 
-        update();
+        this.update(topButton, bottomButton);
     }
 };
 
