@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOS App Security: Keychain, Tokens and Authentication | Muhammed Ayaz</title>
+<meta name="description" content="Simple security practices for storing tokens, using Keychain and handling authentication safely in an iOS app.">
+<link rel="canonical" href="https://muhammedayaz77.github.io/MuhammedAyaz.github.io/Blog/ios-app-security-keychain.html">
+<link rel="stylesheet" href="../View Controller/styles.css">
+<link rel="stylesheet" href="../View Controller/theme.css">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">MA<span>.</span></a>
+<div class="nav-tools">
+<a class="nav-back" href="../View/home.html#blog">← Back to Blog</a>
+<div class="theme-area"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"><span class="theme-icon" id="themeIcon">☼</span><span class="theme-label" id="themeLabel">Dark</span></button></div>
+</div>
+</nav>
+<main class="article-page">
+<div class="article-wrap">
+<header class="article-hero">
+<div class="tag">Security</div>
+<h1>iOS App Security: Keychain, Tokens and Authentication</h1>
+<p class="lead">Simple security practices for storing tokens, using Keychain and handling authentication safely in an iOS app.</p>
+<div class="article-meta"><span>8 min read</span><span>Intermediate</span><span>September 2026</span></div>
+</header>
+<article class="article"><h2>Security starts with small decisions</h2>
+<p>App security is not one feature. It is a set of small decisions about where data is stored, how users authenticate and what the app trusts.</p>
+<p>Some mistakes are easy to avoid. One of the most common is storing sensitive values in UserDefaults just because it is convenient.</p>
+<h2>Do not use UserDefaults for secrets</h2>
+<p>UserDefaults is useful for preferences such as selected settings or onboarding flags. It is not the right place for passwords, refresh tokens or other sensitive credentials.</p>
+<div class="callout"><strong>Use Keychain for sensitive small values</strong> such as authentication tokens and credentials that need protected storage.</div>
+<h2>A small Keychain wrapper</h2>
+<div class="code"><pre>import Security
+
+final class KeychainStore {
+    func save(_ value: Data, key: String) throws {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecValueData as String: value
+        ]
+
+        SecItemDelete(query as CFDictionary)
+
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            throw KeychainError.saveFailed(status)
+        }
+    }
+}</pre></div>
+<p>The exact wrapper can be made richer, but keeping Keychain access behind one small type is a good start.</p>
+<h2>Access tokens and refresh tokens</h2>
+<p>Many apps use a short-lived access token and a longer-lived refresh token. The access token is sent with API requests. When it expires, the refresh token can be used to get a new one, depending on the server design.</p>
+<p>Keep this flow in one authentication layer. Screens should not need to know how token refresh works.</p>
+<h2>Biometric authentication</h2>
+<p>Face ID and Touch ID can add a useful layer when the app protects private content. LocalAuthentication can be used to ask the system to verify the user.</p>
+<div class="code"><pre>import LocalAuthentication
+
+let context = LAContext()
+
+context.evaluatePolicy(
+    .deviceOwnerAuthentication,
+    localizedReason: "Unlock your account"
+) { success, error in
+    // Update the app state
+}</pre></div>
+<p>Biometrics should normally unlock something already protected by the app. They should not replace server-side authentication by themselves.</p>
+<h2>Never ship real secrets in the app</h2>
+<p>API keys, private signing secrets and server credentials should not be treated as safe just because the repository is private. A client application runs on a user's device, so anything inside it may be inspected.</p>
+<p>If a secret must stay secret, keep the operation on a server that your app calls.</p>
+<h2>Use HTTPS</h2>
+<p>Production API traffic should use HTTPS. App Transport Security also gives iOS apps a safer default for network communication. Avoid weakening those protections just to make a development endpoint work.</p>
+<h2>Be careful with logs</h2>
+<p>Logs are useful while debugging, but tokens, passwords and personal data should never be printed casually. A forgotten debug log can become a security problem later.</p>
+<h2>Keep authentication state clear</h2>
+<p>It helps to have one source of truth for whether the user is signed in. That state can drive the UI while the authentication layer owns the details of tokens and refresh.</p>
+<h2>Security checklist</h2>
+<ul><li>Use Keychain for sensitive credentials.</li><li>Use HTTPS for production API traffic.</li><li>Do not hard-code private server secrets in the app.</li><li>Keep authentication and token refresh in one layer.</li><li>Use LocalAuthentication when it adds value.</li><li>Do not print tokens or passwords in logs.</li><li>Clear credentials during a real sign-out when required by the product.</li></ul>
+<h2>Final thought</h2>
+<p>Good iOS security is usually boring. That is a good thing. Put sensitive data in the right place, keep authentication logic together and avoid trusting the client with secrets it cannot safely protect.</p></article>
+<div class="article-nav"><a href="../View/home.html#blog">← All articles</a><a href="../index.html">Portfolio home →</a></div>
+<div class="article-footer">Muhammed Ayaz • Lead iOS Developer</div>
+</div>
+</main>
+</div>
+<script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
+</body>
+</html>
