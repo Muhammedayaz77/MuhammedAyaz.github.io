@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern iOS Networking with URLSession | Muhammed Ayaz</title>
+<meta name="description" content="A simple production approach to REST APIs, Codable, errors, loading states and clean networking code in Swift.">
+<link rel="canonical" href="https://muhammedayaz77.github.io/MuhammedAyaz.github.io/Blog/modern-ios-networking-urlsession.html">
+<link rel="stylesheet" href="../View Controller/styles.css">
+<link rel="stylesheet" href="../View Controller/theme.css">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">MA<span>.</span></a>
+<div class="nav-tools">
+<a class="nav-back" href="../View/home.html#blog">← Back to Blog</a>
+<div class="theme-area"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"><span class="theme-icon" id="themeIcon">☼</span><span class="theme-label" id="themeLabel">Dark</span></button></div>
+</div>
+</nav>
+<main class="article-page">
+<div class="article-wrap">
+<header class="article-hero">
+<div class="tag">Networking</div>
+<h1>Modern iOS Networking with URLSession</h1>
+<p class="lead">A simple production approach to REST APIs, Codable, errors, loading states and clean networking code in Swift.</p>
+<div class="article-meta"><span>8 min read</span><span>Intermediate</span><span>September 2026</span></div>
+</header>
+<article class="article"><h2>Why networking needs a simple structure</h2>
+<p>Most iOS apps need to talk to a server. The app sends a request, gets JSON back, turns that JSON into Swift models and then updates the screen.</p>
+<p>The problem starts when every ViewModel does this work by itself. URLs, headers, decoding and error handling get mixed with UI code. After some time, changing one API becomes harder than it should be.</p>
+<div class="callout"><strong>A good rule:</strong> keep networking code away from the screen. The ViewModel should ask for data, not build every HTTP request.</div>
+<h2>A small networking layer</h2>
+<p>A practical setup can have three parts: an API client, request definitions and models.</p>
+<div class="code"><pre>struct User: Codable {
+    let id: Int
+    let name: String
+}
+
+enum APIError: Error {
+    case invalidURL
+    case server(Int)
+    case decoding
+    case network(Error)
+}
+
+final class APIClient {
+    func getUsers() async throws -> [User] {
+        let url = URL(string: "https://example.com/users")!
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let http = response as? HTTPURLResponse else {
+            throw APIError.network(URLError(.badServerResponse))
+        }
+
+        guard (200...299).contains(http.statusCode) else {
+            throw APIError.server(http.statusCode)
+        }
+
+        do {
+            return try JSONDecoder().decode([User].self, from: data)
+        } catch {
+            throw APIError.decoding
+        }
+    }
+}</pre></div>
+<h2>Use Codable for JSON</h2>
+<p>Codable keeps the model code small and readable. When the server names are different, use CodingKeys instead of manually reading every JSON value.</p>
+<h2>Handle loading, success and failure</h2>
+<p>A screen normally has at least three useful states: loading, content and error. Treat them as real states instead of using many unrelated Boolean flags.</p>
+<div class="code"><pre>enum ViewState {
+    case idle
+    case loading
+    case loaded([User])
+    case failed(String)
+}</pre></div>
+<p>This makes the UI easier to reason about. It also prevents odd combinations such as <code>isLoading == true</code> while an error message is already visible.</p>
+<h2>What about authentication?</h2>
+<p>For protected APIs, keep token handling in one place. A networking layer can add an Authorization header without every screen knowing how the token is stored.</p>
+<p>Do not put secret API keys directly in the iOS app. Anything shipped inside the app can eventually be inspected.</p>
+<h2>Timeouts, retry and cancellation</h2>
+<p>Not every failed request should be retried. A timeout or temporary connection problem may be worth retrying. A 400 response usually needs a different action.</p>
+<p>Async/await also makes cancellation easier. If a user leaves a screen, a task can be cancelled instead of continuing work that nobody needs.</p>
+<h2>Keep the ViewModel small</h2>
+<div class="code"><pre>@MainActor
+final class UsersViewModel: ObservableObject {
+    @Published private(set) var state: ViewState = .idle
+
+    private let api: APIClient
+
+    init(api: APIClient) {
+        self.api = api
+    }
+
+    func load() async {
+        state = .loading
+        do {
+            state = .loaded(try await api.getUsers())
+        } catch {
+            state = .failed("Could not load users.")
+        }
+    }
+}</pre></div>
+<p>The ViewModel now focuses on screen state. The API client focuses on HTTP work. This separation is simple, but it makes the code much easier to test and maintain.</p>
+<h2>My practical checklist</h2>
+<ul><li>Use URLSession for HTTP requests.</li><li>Use Codable for JSON models.</li><li>Keep API calls outside the UI layer.</li><li>Map technical errors into useful app errors.</li><li>Model loading and failure states clearly.</li><li>Keep authentication and common headers in one place.</li><li>Support cancellation for work tied to a screen.</li></ul>
+<h2>Final thought</h2>
+<p>Networking does not need a huge framework to be good. A small, clear layer around URLSession is often enough. The important part is keeping responsibilities separate and making failures visible instead of hiding them.</p></article>
+<div class="article-nav"><a href="../View/home.html#blog">← All articles</a><a href="../index.html">Portfolio home →</a></div>
+<div class="article-footer">Muhammed Ayaz • Lead iOS Developer</div>
+</div>
+</main>
+</div>
+<script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
+</body>
+</html>
