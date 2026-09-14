@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Testing and UI Testing in iOS | Muhammed Ayaz</title>
+<meta name="description" content="A practical guide to XCTest, ViewModel tests, async code and UI testing without making the test suite hard to maintain.">
+<link rel="canonical" href="https://muhammedayaz77.github.io/MuhammedAyaz.github.io/Blog/ios-testing-xctest-ui-testing.html">
+<link rel="stylesheet" href="../View Controller/styles.css">
+<link rel="stylesheet" href="../View Controller/theme.css">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">MA<span>.</span></a>
+<div class="nav-tools">
+<a class="nav-back" href="../View/home.html#blog">← Back to Blog</a>
+<div class="theme-area"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"><span class="theme-icon" id="themeIcon">☼</span><span class="theme-label" id="themeLabel">Dark</span></button></div>
+</div>
+</nav>
+<main class="article-page">
+<div class="article-wrap">
+<header class="article-hero">
+<div class="tag">Testing</div>
+<h1>Unit Testing and UI Testing in iOS</h1>
+<p class="lead">A practical guide to XCTest, ViewModel tests, async code and UI testing without making the test suite hard to maintain.</p>
+<div class="article-meta"><span>9 min read</span><span>Intermediate</span><span>September 2026</span></div>
+</header>
+<article class="article"><h2>Why test iOS apps?</h2>
+<p>Tests give us confidence when code changes. They are especially useful in apps with many features, multiple developers and regular releases.</p>
+<p>The goal is not to test every line. The goal is to protect important behavior.</p>
+<h2>Start with unit tests</h2>
+<p>A unit test checks a small piece of logic without starting the whole app. ViewModels, formatters, validation rules and service logic are good examples.</p>
+<div class="code"><pre>func testLoginWithValidCredentialsSucceeds() async throws {
+    let service = FakeAuthService(result: .success)
+    let viewModel = LoginViewModel(service: service)
+
+    await viewModel.login(
+        email: "test@example.com",
+        password: "password"
+    )
+
+    XCTAssertTrue(viewModel.isLoggedIn)
+}</pre></div>
+<p>The test reads like a small story: arrange the objects, perform the action and check the result.</p>
+<h2>Use fakes instead of real servers</h2>
+<p>A unit test should not depend on a live API. A fake service lets the test control the response.</p>
+<div class="code"><pre>final class FakeAuthService: AuthService {
+    let result: Result<Void, Error>
+
+    init(result: Result<Void, Error>) {
+        self.result = result
+    }
+
+    func login(email: String, password: String) async throws {
+        try result.get()
+    }
+}</pre></div>
+<h2>Test failure cases too</h2>
+<p>Happy-path tests are useful, but real apps also fail. Test invalid input, server errors, empty results, expired sessions and other important cases.</p>
+<div class="callout"><strong>A useful question:</strong> “What should the user see if this operation fails?” That answer usually tells you what to test.</div>
+<h2>Testing async code</h2>
+<p>Modern iOS code often uses async/await. XCTest supports async test methods, so you can wait for the operation directly instead of adding complicated expectations everywhere.</p>
+<h2>Keep UI tests for real user flows</h2>
+<p>UI tests are slower than unit tests, so I use them for important journeys rather than every small detail.</p>
+<ul><li>Launch the app.</li><li>Sign in.</li><li>Open an important feature.</li><li>Perform a key action.</li><li>Check the result.</li></ul>
+<p>This kind of test protects the connection between screens and real user actions.</p>
+<h2>Make UI tests stable</h2>
+<p>A UI test becomes painful when it depends on timing, animations or fragile text selectors. Give important controls stable accessibility identifiers.</p>
+<div class="code"><pre>loginButton.accessibilityIdentifier = "loginButton"</pre></div>
+<p>Then the UI test can find the control by a stable identifier instead of depending on its visible title.</p>
+<h2>Do not put everything in UI tests</h2>
+<p>If a business rule can be tested without launching the app, test it as a unit. A large suite of UI tests takes longer to run and is harder to debug.</p>
+<h2>Test architecture matters</h2>
+<p>Good architecture makes testing easier. When a ViewModel receives its service through dependency injection, a test can replace the real service with a fake.</p>
+<p>This is one reason I like keeping UI code, business logic and external services separated.</p>
+<h2>A simple test pyramid</h2>
+<div class="code"><pre>Many        → Unit tests
+Some        → Integration / service tests
+Few         → End-to-end UI tests</pre></div>
+<p>The exact number depends on the project, but the idea is useful: most fast checks should stay close to the code they protect.</p>
+<h2>What I check before shipping</h2>
+<ul><li>Important ViewModel logic has unit tests.</li><li>Success and failure paths are covered.</li><li>Async operations are tested without real network calls.</li><li>Critical user journeys have UI tests.</li><li>Important UI controls have stable identifiers.</li><li>Tests run in CI before release.</li></ul>
+<h2>Final thought</h2>
+<p>A good test suite should make development feel safer, not slower. Start with important behavior, keep tests simple and use the right test level for the job.</p></article>
+<div class="article-nav"><a href="../View/home.html#blog">← All articles</a><a href="../index.html">Portfolio home →</a></div>
+<div class="article-footer">Muhammed Ayaz • Lead iOS Developer</div>
+</div>
+</main>
+</div>
+<script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
+</body>
+</html>
