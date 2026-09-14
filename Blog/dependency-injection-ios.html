@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dependency Injection in iOS | Muhammed Ayaz</title>
+<meta name="description" content="A practical and easy way to use dependency injection in Swift so ViewModels stay clean, flexible and easy to test.">
+<link rel="canonical" href="https://muhammedayaz77.github.io/MuhammedAyaz.github.io/Blog/dependency-injection-ios.html">
+<link rel="stylesheet" href="../View Controller/styles.css">
+<link rel="stylesheet" href="../View Controller/theme.css">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">MA<span>.</span></a>
+<div class="nav-tools">
+<a class="nav-back" href="../View/home.html#blog">← Back to Blog</a>
+<div class="theme-area"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"><span class="theme-icon" id="themeIcon">☼</span><span class="theme-label" id="themeLabel">Dark</span></button></div>
+</div>
+</nav>
+<main class="article-page">
+<div class="article-wrap">
+<header class="article-hero">
+<div class="tag">Architecture</div>
+<h1>Dependency Injection in iOS</h1>
+<p class="lead">A practical and easy way to use dependency injection in Swift so ViewModels stay clean, flexible and easy to test.</p>
+<div class="article-meta"><span>7 min read</span><span>Intermediate</span><span>September 2026</span></div>
+</header>
+<article class="article"><h2>What is dependency injection?</h2>
+<p>Dependency injection sounds like a big architecture term, but the idea is simple: a class should receive the things it needs instead of creating them itself.</p>
+<p>For example, a ViewModel may need an API service. Instead of creating APIClient inside the ViewModel, pass the service into the initializer.</p>
+<div class="code"><pre>final class UserViewModel {
+    private let api: UserAPI
+
+    init(api: UserAPI) {
+        self.api = api
+    }
+}</pre></div>
+<h2>Why does this help?</h2>
+<p>It gives us a clear separation between the class and the concrete object it uses. The ViewModel only cares about the work it can ask the API to do.</p>
+<div class="callout"><strong>The biggest benefit:</strong> testing becomes much easier because we can pass a fake service.</div>
+<h2>Use protocols at the boundary</h2>
+<div class="code"><pre>protocol UserAPI {
+    func fetchUsers() async throws -> [User]
+}
+
+final class LiveUserAPI: UserAPI {
+    func fetchUsers() async throws -> [User] {
+        // Real network request
+        []
+    }
+}
+
+final class UserViewModel {
+    private let api: UserAPI
+
+    init(api: UserAPI) {
+        self.api = api
+    }
+}</pre></div>
+<p>The ViewModel does not know whether the service uses URLSession, a local database or a test object.</p>
+<h2>Testing becomes simple</h2>
+<div class="code"><pre>final class FakeUserAPI: UserAPI {
+    var users = [User(id: 1, name: "Test")]
+
+    func fetchUsers() async throws -> [User] {
+        users
+    }
+}
+
+let viewModel = UserViewModel(api: FakeUserAPI())</pre></div>
+<p>Now the test does not need a real server. This makes tests faster and more reliable.</p>
+<h2>Do not overdo dependency injection</h2>
+<p>DI is useful, but adding a protocol for every small type can make a project harder to understand. I normally use it at important boundaries such as networking, storage, analytics, payments and other services that may change or need mocking.</p>
+<h2>Constructor injection is my first choice</h2>
+<p>Passing dependencies through the initializer makes the requirements visible. If an object needs three services, its initializer shows those three services.</p>
+<p>Property injection can hide required dependencies, so I use it only when there is a clear reason.</p>
+<h2>Composition root</h2>
+<p>At some point, the app has to decide which real implementations to create. Keep that decision near the application entry point or feature assembly code.</p>
+<div class="code"><pre>let api = LiveUserAPI()
+let analytics = LiveAnalytics()
+
+let viewModel = UserViewModel(
+    api: api
+)</pre></div>
+<p>The rest of the feature can work with protocols. This is often called the composition root. You do not need a complex dependency container to follow the idea.</p>
+<h2>DI with SwiftUI</h2>
+<p>SwiftUI also works well with constructor injection. Create the ViewModel outside the view and pass it in, or use environment-based dependencies when the same service is shared across a large part of the app.</p>
+<h2>Common mistakes</h2>
+<ul><li>Creating services directly inside every ViewModel.</li><li>Using a global singleton for everything.</li><li>Creating protocols that add no useful abstraction.</li><li>Using a large dependency container when a few initializers are enough.</li></ul>
+<h2>Final thought</h2>
+<p>Good dependency injection is not about adding more files. It is about making dependencies clear. If a class can be tested without starting the whole application, you are already moving in the right direction.</p></article>
+<div class="article-nav"><a href="../View/home.html#blog">← All articles</a><a href="../index.html">Portfolio home →</a></div>
+<div class="article-footer">Muhammed Ayaz • Lead iOS Developer</div>
+</div>
+</main>
+</div>
+<script src="../View Controller/themeViewModel.js"></script>
+<script src="../View Controller/scrollControlsViewModel.js"></script>
+</body>
+</html>
