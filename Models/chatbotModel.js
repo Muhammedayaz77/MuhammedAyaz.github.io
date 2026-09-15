@@ -1,0 +1,1 @@
+const ChatbotModel = Object.freeze({ dataUrl: "../Assets/Chatbot/portfolioChatbot.json", async load() { const response = await fetch(this.dataUrl); if (!response.ok) throw new Error("Unable to load chatbot knowledge."); return response.json(); } });
