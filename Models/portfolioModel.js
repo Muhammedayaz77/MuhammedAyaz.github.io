@@ -6,7 +6,7 @@ const PortfolioModel = Object.freeze({
         email: "ayaz.job2010@gmail.com",
         github: "https://github.com/Muhammedayaz77",
         linkedIn: "https://in.linkedin.com/in/muhammed-ayaz-019150a8",
-        availability: "Open to senior / lead iOS opportunities"
+        availability: "Senior / Lead iOS Engineer · Open to Opportunities"
     },
 
     companyLogos: {
