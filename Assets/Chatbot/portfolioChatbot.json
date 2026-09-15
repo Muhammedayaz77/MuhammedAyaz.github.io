@@ -500,66 +500,6 @@
         "Do you contribute to open source?"
       ],
       "answer": "Yes. My portfolio includes public Swift work, including the Reusable Swift Developer Toolkit."
-    },
-    {
-      "id": "work_style",
-      "questions": [
-        "What is your development approach?",
-        "How do you approach software development?",
-        "What is your engineering mindset?",
-        "How do you build software?"
-      ],
-      "answer": "I prefer practical engineering: understand the requirement, keep architecture maintainable, write reliable code, test important behavior and deliver a solution that works well in production."
-    },
-    {
-      "id": "teamwork",
-      "questions": [
-        "Can you work with a team?",
-        "Do you have team experience?",
-        "How do you work with developers?",
-        "Are you comfortable in a development team?"
-      ],
-      "answer": "Yes. My professional experience includes working in software teams and delivering production iOS applications. I value clear communication, ownership and maintainable shared code."
-    },
-    {
-      "id": "why_hire",
-      "questions": [
-        "Why should we hire you?",
-        "Why should we choose you?",
-        "What makes you a good iOS developer?",
-        "Why are you a good fit for an iOS role?"
-      ],
-      "answer": "I bring long-term native iOS experience, including 10+ years with Objective-C and 6+ years with Swift, combined with practical production engineering, architecture and problem-solving experience."
-    },
-    {
-      "id": "favorite_area",
-      "questions": [
-        "What part of iOS do you enjoy most?",
-        "What do you like about iOS development?",
-        "What is your favorite part of iOS?",
-        "What do you enjoy building?"
-      ],
-      "answer": "I enjoy building native iOS applications, solving engineering problems, improving architecture and turning product requirements into reliable user experiences."
-    },
-    {
-      "id": "future",
-      "questions": [
-        "What are you learning next?",
-        "What technologies do you want to learn?",
-        "What are your future goals?",
-        "What do you want to work on next?"
-      ],
-      "answer": "I’m interested in continuing to deepen modern iOS development while exploring practical software, automation and emerging technologies that can support real products."
-    },
-    {
-      "id": "thanks",
-      "questions": [
-        "Thank you",
-        "Thanks",
-        "Thank you for your help",
-        "Thanks for the information"
-      ],
-      "answer": "You’re welcome! If you want to know more about Ayaz, his iOS experience, projects or career, just ask."
     }
   ]
 }
