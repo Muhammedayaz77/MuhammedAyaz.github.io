@@ -1,1 +1,23 @@
-const ChatbotMatcher = Object.freeze({ stopWords: new Set(["a","an","the","is","are","am","do","does","did","you","your","have","has","had","i","me","my","to","of","for","in","on","with","and","or","can","could","would","what","how","tell","about","please","may","know","who","where","when","which","much","many"]), normalize(text) { return String(text || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim(); }, tokens(text) { return this.normalize(text).split(" ").filter(token => token && !this.stopWords.has(token)); }, stem(token) { return token.length > 4 ? token.replace(/(ing|ed|es|s)$/, "") : token; }, score(userQuestion, candidate) { const input=this.tokens(userQuestion).map(t=>this.stem(t)); const target=this.tokens(candidate).map(t=>this.stem(t)); if(!input.length||!target.length)return 0; const a=new Set(input),b=new Set(target); const intersection=[...a].filter(t=>b.has(t)).length; const union=new Set([...a,...b]).size; const jaccard=union?intersection/union:0; const coverage=intersection/Math.max(1,Math.min(a.size,b.size)); return Math.min(1,jaccard*.45+coverage*.45+(this.normalize(userQuestion)===this.normalize(candidate)?0.5:0)); }, findAnswer(question,intents) { let best=null; for(const intent of intents||[]) for(const candidate of intent.questions||[]){const score=this.score(question,candidate); if(!best||score>best.score)best={intent,score};} if(!best||best.score<.42)return {matched:false,score:best?.score||0,answer:"I’m mainly here to answer questions about Muhammed Ayaz, his iOS experience, skills, projects, career and portfolio. Please try asking me something related to his work."}; return {matched:true,score:best.score,answer:best.intent.answer,intent:best.intent.id}; } });
+const ChatbotMatcher = Object.freeze({
+    stopWords: new Set(["a","an","the","is","are","am","do","does","did","you","your","have","has","had","i","me","my","to","of","for","in","on","with","and","or","can","could","would","what","how","tell","about","please","may","know","who","where","when","which","much","many"]),
+    corrections: { wat:"what", wats:"what", ur:"your", u:"you", nam:"name", experince:"experience", experiance:"experience", exp:"experience", objc:"objective", objctive:"objective", techonology:"technology", devlop:"develop", devloper:"developer" },
+    normalize(text) {
+        let value=String(text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
+        return value.split(" ").map(token=>this.corrections[token]||token).join(" ");
+    },
+    tokens(text) { return this.normalize(text).split(" ").filter(token=>token&&!this.stopWords.has(token)); },
+    stem(token) { return token.length>4 ? token.replace(/(ing|ed|es|s)$/,"") : token; },
+    score(userQuestion,candidate) {
+        const input=this.tokens(userQuestion).map(t=>this.stem(t)), target=this.tokens(candidate).map(t=>this.stem(t));
+        if(!input.length||!target.length)return 0;
+        const a=new Set(input),b=new Set(target),intersection=[...a].filter(t=>b.has(t)).length,union=new Set([...a,...b]).size;
+        const jaccard=union?intersection/union:0,coverage=intersection/Math.max(1,Math.min(a.size,b.size));
+        return Math.min(1,jaccard*.45+coverage*.45+(this.normalize(userQuestion)===this.normalize(candidate)?.5:0));
+    },
+    findAnswer(question,intents) {
+        let best=null;
+        for(const intent of intents||[]) for(const candidate of intent.questions||[]){const score=this.score(question,candidate);if(!best||score>best.score)best={intent,score};}
+        if(!best||best.score<.42)return {matched:false,score:best?.score||0,answer:"I’m mainly here to answer questions about Muhammed Ayaz, his iOS experience, skills, projects, career and portfolio. Please try asking me something related to his work."};
+        return {matched:true,score:best.score,answer:best.intent.answer,intent:best.intent.id};
+    }
+});
