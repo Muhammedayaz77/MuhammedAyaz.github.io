@@ -1,23 +1,10 @@
-const ChatbotMatcher = Object.freeze({
-    stopWords: new Set(["a","an","the","is","are","am","do","does","did","you","your","have","has","had","i","me","my","to","of","for","in","on","with","and","or","can","could","would","what","how","tell","about","please","may","know","who","where","when","which","much","many"]),
-    corrections: { wat:"what", wats:"what", ur:"your", u:"you", nam:"name", experince:"experience", experiance:"experience", exp:"experience", objc:"objective", objctive:"objective", techonology:"technology", devlop:"develop", devloper:"developer" },
-    normalize(text) {
-        let value=String(text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
-        return value.split(" ").map(token=>this.corrections[token]||token).join(" ");
-    },
-    tokens(text) { return this.normalize(text).split(" ").filter(token=>token&&!this.stopWords.has(token)); },
-    stem(token) { return token.length>4 ? token.replace(/(ing|ed|es|s)$/,"") : token; },
-    score(userQuestion,candidate) {
-        const input=this.tokens(userQuestion).map(t=>this.stem(t)), target=this.tokens(candidate).map(t=>this.stem(t));
-        if(!input.length||!target.length)return 0;
-        const a=new Set(input),b=new Set(target),intersection=[...a].filter(t=>b.has(t)).length,union=new Set([...a,...b]).size;
-        const jaccard=union?intersection/union:0,coverage=intersection/Math.max(1,Math.min(a.size,b.size));
-        return Math.min(1,jaccard*.45+coverage*.45+(this.normalize(userQuestion)===this.normalize(candidate)?.5:0));
-    },
-    findAnswer(question,intents) {
-        let best=null;
-        for(const intent of intents||[]) for(const candidate of intent.questions||[]){const score=this.score(question,candidate);if(!best||score>best.score)best={intent,score};}
-        if(!best||best.score<.42)return {matched:false,score:best?.score||0,answer:"I’m mainly here to answer questions about Muhammed Ayaz, his iOS experience, skills, projects, career and portfolio. Please try asking me something related to his work."};
-        return {matched:true,score:best.score,answer:best.intent.answer,intent:best.intent.id};
-    }
+const ChatbotMatcher=Object.freeze({
+ stopWords:new Set(["a","an","the","is","are","am","do","does","did","you","your","have","has","had","i","me","my","to","of","for","in","on","with","and","or","can","could","would","what","how","tell","about","please","may","know","who","where","when","which","much","many"]),
+ corrections:{wat:"what",wats:"what",ur:"your",u:"you",nam:"name",experince:"experience",experiance:"experience",exp:"experience",swfit:"swift",switf:"swift",objctive:"objective",objc:"objective",devloper:"developer",devlop:"develop"},
+ normalize(text){return String(text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim().split(" ").map(t=>this.corrections[t]||t).join(" ")},
+ tokens(text){return this.normalize(text).split(" ").filter(t=>t&&!this.stopWords.has(t))},
+ stem(t){return t.length>4?t.replace(/(ing|ed|es|s)$/,""):t},
+ score(a,b){const A=new Set(this.tokens(a).map(t=>this.stem(t))),B=new Set(this.tokens(b).map(t=>this.stem(t)));if(!A.size||!B.size)return 0;const i=[...A].filter(t=>B.has(t)).length,u=new Set([...A,...B]).size;return Math.min(1,i/u*.45+i/Math.min(A.size,B.size)*.45+(this.normalize(a)===this.normalize(b)?.5:0))},
+ findAnswer(question,intents,context=""){const combined=context+" "+question;let best=null;for(const intent of intents||[])for(const candidate of intent.questions||[]){const score=this.score(combined,candidate);if(!best||score>best.score)best={intent,score}}if(!best||best.score<.42)return{matched:false,score:best?.score||0,answer:"I’m mainly here to answer questions about Muhammed Ayaz, his iOS experience, skills, projects, career and portfolio. Please try asking me something related to his work."};return{matched:true,score:best.score,answer:best.intent.answer,intent:best.intent.id}},
+ search(question,items){return(items||[]).map(item=>({item,score:this.score(question,[item.title,...(item.keywords||[])].join(" "))})).filter(x=>x.score>=.28).sort((a,b)=>b.score-a.score).slice(0,5)}
 });
