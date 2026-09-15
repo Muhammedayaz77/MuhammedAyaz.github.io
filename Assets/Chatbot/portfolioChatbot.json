@@ -501,5 +501,141 @@
       ],
       "answer": "Yes. My portfolio includes public Swift work, including the Reusable Swift Developer Toolkit."
     }
+  ],
+  "navigation": {
+    "projects": "#projects",
+    "experience": "#experience",
+    "skills": "#skills",
+    "about": "#about",
+    "blog": "#blog",
+    "contact": "#contact",
+    "resume": "../Assets/Documents/Muhammed_Ayaz_Resume.pdf",
+    "github": "https://github.com/Muhammedayaz77",
+    "linkedin": "https://www.linkedin.com/in/muhammedayaz/"
+  },
+  "searchable": [
+    {
+      "id": "swift-toolkit",
+      "type": "project",
+      "title": "Reusable Swift Developer Toolkit",
+      "keywords": [
+        "swift",
+        "swiftui",
+        "uikit",
+        "foundation",
+        "extensions",
+        "open source"
+      ],
+      "target": "#projects"
+    },
+    {
+      "id": "hind-pharma",
+      "type": "project",
+      "title": "Hind Pharma Management Platform",
+      "keywords": [
+        "hind pharma",
+        "pharma",
+        "fastapi",
+        "sqlite",
+        "javascript",
+        "business platform"
+      ],
+      "target": "#projects"
+    },
+    {
+      "id": "swift",
+      "type": "skill",
+      "title": "Swift",
+      "keywords": [
+        "swift",
+        "6+ years",
+        "ios"
+      ],
+      "target": "#skills"
+    },
+    {
+      "id": "objective-c",
+      "type": "skill",
+      "title": "Objective-C",
+      "keywords": [
+        "objective-c",
+        "objc",
+        "10+ years",
+        "ios"
+      ],
+      "target": "#skills"
+    },
+    {
+      "id": "swiftui",
+      "type": "skill",
+      "title": "SwiftUI",
+      "keywords": [
+        "swiftui",
+        "1 year"
+      ],
+      "target": "#skills"
+    },
+    {
+      "id": "uikit",
+      "type": "skill",
+      "title": "UIKit",
+      "keywords": [
+        "uikit",
+        "ios"
+      ],
+      "target": "#skills"
+    },
+    {
+      "id": "python",
+      "type": "skill",
+      "title": "Python",
+      "keywords": [
+        "python",
+        "basic",
+        "beginner"
+      ],
+      "target": "#skills"
+    },
+    {
+      "id": "articles",
+      "type": "section",
+      "title": "Technical Articles",
+      "keywords": [
+        "blog",
+        "articles",
+        "technical writing",
+        "swift concurrency",
+        "architecture",
+        "performance",
+        "networking",
+        "security",
+        "testing"
+      ],
+      "target": "#blog"
+    },
+    {
+      "id": "contact",
+      "type": "section",
+      "title": "Contact",
+      "keywords": [
+        "contact",
+        "hire",
+        "message",
+        "reach"
+      ],
+      "target": "#contact"
+    },
+    {
+      "id": "experience",
+      "type": "section",
+      "title": "Experience",
+      "keywords": [
+        "experience",
+        "career",
+        "work history",
+        "jobs"
+      ],
+      "target": "#experience"
+    }
   ]
 }
