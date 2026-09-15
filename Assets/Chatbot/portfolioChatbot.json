@@ -1,0 +1,565 @@
+{
+  "version": "1.0",
+  "intents": [
+    {
+      "id": "name",
+      "questions": [
+        "What is your name?",
+        "Tell me your name",
+        "Who are you?",
+        "May I know your name?"
+      ],
+      "answer": "My name is Muhammed Ayaz. I’m a Lead iOS Developer with 12+ years of professional software engineering experience."
+    },
+    {
+      "id": "role",
+      "questions": [
+        "What do you do?",
+        "What is your role?",
+        "What do you work as?",
+        "What kind of developer are you?"
+      ],
+      "answer": "I’m a Lead iOS Developer focused on native iOS application development, with strong experience in Objective-C and Swift."
+    },
+    {
+      "id": "experience",
+      "questions": [
+        "How many years of experience do you have?",
+        "How much experience do you have?",
+        "How long have you been developing software?",
+        "How many years have you worked in software?"
+      ],
+      "answer": "I have 12+ years of professional software engineering experience, with my main expertise in native iOS development."
+    },
+    {
+      "id": "ios_experience",
+      "questions": [
+        "How many years of iOS experience do you have?",
+        "How long have you worked with iOS?",
+        "Tell me about your iOS experience",
+        "What is your iOS experience?"
+      ],
+      "answer": "My professional career has been strongly focused on native iOS development. I have worked across Objective-C, Swift, UIKit, iOS SDKs, architecture, APIs, testing and production applications."
+    },
+    {
+      "id": "objective_c",
+      "questions": [
+        "How many years of Objective-C experience do you have?",
+        "Are you experienced in Objective-C?",
+        "Tell me about your Objective-C experience",
+        "How long have you used Objective-C?"
+      ],
+      "answer": "I have 10+ years of experience with Objective-C, mainly in native iOS development and production applications."
+    },
+    {
+      "id": "swift",
+      "questions": [
+        "How many years of Swift experience do you have?",
+        "How experienced are you with Swift?",
+        "Tell me about your Swift experience",
+        "How long have you worked with Swift?"
+      ],
+      "answer": "I have 6+ years of experience with Swift, primarily for native iOS application development."
+    },
+    {
+      "id": "swiftui",
+      "questions": [
+        "How much SwiftUI experience do you have?",
+        "Are you experienced with SwiftUI?",
+        "How long have you used SwiftUI?",
+        "Tell me about your SwiftUI experience"
+      ],
+      "answer": "I have around 1 year of SwiftUI experience. My longer-term experience is with native iOS development using Objective-C, Swift and UIKit."
+    },
+    {
+      "id": "python",
+      "questions": [
+        "Do you know Python?",
+        "How much Python do you know?",
+        "Are you a Python developer?",
+        "What is your Python experience?"
+      ],
+      "answer": "I have basic Python knowledge and consider myself a beginner with Python. My primary expertise is native iOS development."
+    },
+    {
+      "id": "strongest",
+      "questions": [
+        "What is your strongest technology?",
+        "What technology are you best at?",
+        "What is your main technical strength?",
+        "Which technology is your specialty?"
+      ],
+      "answer": "My strongest area is native iOS development, especially Objective-C and Swift. I have 10+ years of Objective-C experience and 6+ years of Swift experience."
+    },
+    {
+      "id": "uikit",
+      "questions": [
+        "Do you know UIKit?",
+        "How experienced are you with UIKit?",
+        "Tell me about your UIKit experience",
+        "Have you worked with UIKit?"
+      ],
+      "answer": "Yes. UIKit is an important part of my native iOS experience, alongside Objective-C, Swift and the iOS SDK."
+    },
+    {
+      "id": "ios_sdk",
+      "questions": [
+        "Have you worked with the iOS SDK?",
+        "Do you know iOS SDK development?",
+        "What about iOS SDK?",
+        "Are you familiar with Apple iOS frameworks?"
+      ],
+      "answer": "Yes. I have extensive experience working with the iOS SDK and native Apple frameworks in production applications."
+    },
+    {
+      "id": "architecture",
+      "questions": [
+        "What architecture do you use in iOS?",
+        "Which architecture do you prefer?",
+        "Tell me about your iOS architecture experience",
+        "Do you know MVVM?"
+      ],
+      "answer": "I have experience with MVC, MVVM and Clean Architecture, with a focus on maintainability, separation of concerns, testability and practical production needs."
+    },
+    {
+      "id": "clean_architecture",
+      "questions": [
+        "Do you know Clean Architecture?",
+        "Have you used Clean Architecture?",
+        "What is your Clean Architecture experience?",
+        "Can you work with Clean Architecture?"
+      ],
+      "answer": "Yes. I have experience applying Clean Architecture principles to keep responsibilities separated and make iOS applications easier to maintain and test."
+    },
+    {
+      "id": "mvvm",
+      "questions": [
+        "Do you use MVVM?",
+        "What is your MVVM experience?",
+        "Have you worked with MVVM in iOS?",
+        "Can you build an MVVM app?"
+      ],
+      "answer": "Yes. I have practical experience with MVVM in iOS, particularly for separating presentation logic from views and improving testability and maintainability."
+    },
+    {
+      "id": "solid",
+      "questions": [
+        "Do you know SOLID principles?",
+        "What is your SOLID experience?",
+        "Do you follow SOLID?",
+        "Have you used SOLID in iOS?"
+      ],
+      "answer": "Yes. I use SOLID principles where they provide practical value, especially for keeping code maintainable, testable and easier to extend."
+    },
+    {
+      "id": "dependency_injection",
+      "questions": [
+        "Do you know dependency injection?",
+        "Have you used dependency injection in iOS?",
+        "What is dependency injection?",
+        "Do you use dependency injection?"
+      ],
+      "answer": "Yes. I use dependency injection to make dependencies explicit, reduce coupling and make components easier to test."
+    },
+    {
+      "id": "rest_api",
+      "questions": [
+        "Have you worked with REST APIs?",
+        "Do you know API integration?",
+        "What is your REST API experience?",
+        "Can you integrate APIs in iOS?"
+      ],
+      "answer": "Yes. I have experience integrating REST APIs in iOS applications, including request handling, JSON data, loading states and error handling."
+    },
+    {
+      "id": "json",
+      "questions": [
+        "Do you work with JSON?",
+        "Have you used JSON in iOS?",
+        "What is your JSON experience?",
+        "Can you handle JSON data?"
+      ],
+      "answer": "Yes. JSON is commonly used in my application work, especially when integrating REST APIs and exchanging structured data."
+    },
+    {
+      "id": "testing",
+      "questions": [
+        "Do you write tests?",
+        "What is your testing experience?",
+        "Do you know unit testing in iOS?",
+        "Have you done UI testing?"
+      ],
+      "answer": "Yes. I have experience with unit testing and UI testing, including XCTest-based testing and designing code that is easier to test."
+    },
+    {
+      "id": "performance",
+      "questions": [
+        "Do you have iOS performance experience?",
+        "How do you improve iOS app performance?",
+        "Have you worked on app performance?",
+        "What is your performance experience?"
+      ],
+      "answer": "Yes. I focus on practical iOS performance, including efficient code, responsible resource use, responsive UI and identifying production bottlenecks."
+    },
+    {
+      "id": "xcode",
+      "questions": [
+        "Do you use Xcode?",
+        "What is your Xcode experience?",
+        "Are you comfortable with Xcode?",
+        "Have you developed apps in Xcode?"
+      ],
+      "answer": "Yes. Xcode is my primary development environment for native iOS development."
+    },
+    {
+      "id": "github",
+      "questions": [
+        "Do you use GitHub?",
+        "Where is your GitHub?",
+        "Can I see your GitHub?",
+        "Do you have public projects on GitHub?"
+      ],
+      "answer": "Yes. My GitHub profile contains my public development work and open-source projects."
+    },
+    {
+      "id": "projects",
+      "questions": [
+        "What projects have you built?",
+        "Can I see your projects?",
+        "Tell me about your projects",
+        "What kind of projects do you work on?"
+      ],
+      "answer": "My portfolio includes iOS-focused work such as the Reusable Swift Developer Toolkit, along with broader software projects including the Hind Pharma Management Platform."
+    },
+    {
+      "id": "swift_toolkit",
+      "questions": [
+        "What is Swift Extension Toolkit?",
+        "Tell me about your Swift toolkit project",
+        "What is your Swift developer toolkit?",
+        "Tell me about the reusable Swift project"
+      ],
+      "answer": "The Reusable Swift Developer Toolkit is a practical collection of reusable Swift extensions for Foundation, UIKit and SwiftUI, designed to reduce repeated boilerplate across iOS projects."
+    },
+    {
+      "id": "hind_pharma",
+      "questions": [
+        "What is Hind Pharma?",
+        "Tell me about Hind Pharma",
+        "What is the Hind Pharma project?",
+        "What does Hind Pharma do?"
+      ],
+      "answer": "Hind Pharma is a pharmaceutical-focused business and software platform covering pharmacy management, product and medical data, employee workflows, orders, calling and business operations."
+    },
+    {
+      "id": "current_work",
+      "questions": [
+        "What are you currently working on?",
+        "What project are you working on now?",
+        "What are you building currently?",
+        "What are your current projects?"
+      ],
+      "answer": "My current work includes software and product development under Hind Tech Group, with a strong focus on practical applications and native iOS development."
+    },
+    {
+      "id": "career_start",
+      "questions": [
+        "When did your software career start?",
+        "When did you start developing software?",
+        "How long have you been a developer?",
+        "When did you begin your career?"
+      ],
+      "answer": "I started my professional software engineering career in 2011 and have built more than 12 years of experience since then."
+    },
+    {
+      "id": "work_history",
+      "questions": [
+        "Where have you worked?",
+        "Tell me about your work history",
+        "What companies have you worked for?",
+        "Can I see your professional experience?"
+      ],
+      "answer": "My professional history includes roles at TechNex Technologies, iT Gurus Software, Indecomm Global Services and Etimad, followed by building and running Hind Pharma."
+    },
+    {
+      "id": "abu_dhabi",
+      "questions": [
+        "Have you worked in Abu Dhabi?",
+        "Did you work in the UAE?",
+        "Tell me about your Abu Dhabi experience",
+        "Have you worked internationally?"
+      ],
+      "answer": "Yes. I worked as a Senior iOS Developer at Etimad Pvt. Ltd. in Abu Dhabi from February 2015 to February 2021."
+    },
+    {
+      "id": "pune",
+      "questions": [
+        "Have you worked in Pune?",
+        "Did you work in Pune?",
+        "Tell me about your Pune experience",
+        "Where in India have you worked?"
+      ],
+      "answer": "Yes. I have professional work experience in Pune, including roles at Indecomm Global Services, iT Gurus Software and TechNex Technologies."
+    },
+    {
+      "id": "leadership",
+      "questions": [
+        "Have you worked as a lead developer?",
+        "Do you have leadership experience?",
+        "Can you lead an iOS team?",
+        "What is your leadership experience?"
+      ],
+      "answer": "Yes. My current portfolio positioning is Lead iOS Developer, combining hands-on native iOS engineering with architecture, delivery and practical product ownership experience."
+    },
+    {
+      "id": "production",
+      "questions": [
+        "Have you built production apps?",
+        "Do you have production experience?",
+        "Have you worked on real-world apps?",
+        "Can you work on enterprise iOS apps?"
+      ],
+      "answer": "Yes. My experience includes production iOS applications and enterprise software, with emphasis on reliability, maintainability and practical delivery."
+    },
+    {
+      "id": "debugging",
+      "questions": [
+        "Are you good at debugging?",
+        "Do you have debugging experience?",
+        "Can you fix iOS bugs?",
+        "How do you approach bugs?"
+      ],
+      "answer": "Yes. Debugging and production issue resolution are part of my professional iOS experience. I prefer a structured approach: reproduce, isolate, understand the root cause, fix and verify."
+    },
+    {
+      "id": "code_quality",
+      "questions": [
+        "Do you care about code quality?",
+        "How do you write maintainable code?",
+        "What is your approach to clean code?",
+        "How do you keep iOS code maintainable?"
+      ],
+      "answer": "I focus on clear responsibilities, sensible abstractions, reusable components, readable code and testing where it provides real value."
+    },
+    {
+      "id": "learning",
+      "questions": [
+        "How do you learn new technologies?",
+        "How do you keep your skills updated?",
+        "Do you learn new technologies?",
+        "How do you improve your development skills?"
+      ],
+      "answer": "I learn by combining documentation, practical experimentation and building projects. I prefer learning a technology by applying it to a real problem."
+    },
+    {
+      "id": "swiftui_vs_uikit",
+      "questions": [
+        "SwiftUI or UIKit?",
+        "Which do you prefer SwiftUI or UIKit?",
+        "Do you use SwiftUI or UIKit?",
+        "Which is better for you SwiftUI or UIKit?"
+      ],
+      "answer": "I work with both. UIKit represents a much larger part of my experience, while I also have around 1 year of SwiftUI experience and continue to use modern iOS approaches where appropriate."
+    },
+    {
+      "id": "objective_vs_swift",
+      "questions": [
+        "Objective-C or Swift?",
+        "Which do you prefer Objective-C or Swift?",
+        "Do you still use Objective-C?",
+        "Are you stronger in Swift or Objective-C?"
+      ],
+      "answer": "I have strong experience with both. Objective-C is backed by 10+ years of experience, while Swift has 6+ years. I choose the language based on the project and codebase requirements."
+    },
+    {
+      "id": "availability",
+      "questions": [
+        "Are you available for work?",
+        "Are you open to opportunities?",
+        "Are you looking for a job?",
+        "Are you available for a new role?"
+      ],
+      "answer": "Yes. My portfolio currently lists me as open to Senior / Lead iOS Engineer opportunities. Please use the Contact section to get in touch."
+    },
+    {
+      "id": "freelance",
+      "questions": [
+        "Are you available for freelance work?",
+        "Do you take freelance projects?",
+        "Can I hire you for a project?",
+        "Are you open to freelance opportunities?"
+      ],
+      "answer": "For current freelance or collaboration availability, please use the Contact section of my portfolio to discuss the opportunity."
+    },
+    {
+      "id": "contact",
+      "questions": [
+        "How can I contact you?",
+        "How do I get in touch?",
+        "Can I contact you?",
+        "Where can I send a message?"
+      ],
+      "answer": "You can contact me through the Contact section of this portfolio. My professional links are also available in the portfolio."
+    },
+    {
+      "id": "linkedin",
+      "questions": [
+        "Do you have LinkedIn?",
+        "Can I see your LinkedIn?",
+        "What is your LinkedIn profile?",
+        "Are you on LinkedIn?"
+      ],
+      "answer": "Yes. My LinkedIn profile is available from the portfolio's professional links."
+    },
+    {
+      "id": "education",
+      "questions": [
+        "What is your education?",
+        "Where did you study?",
+        "Tell me about your education",
+        "What is your educational background?"
+      ],
+      "answer": "For education details, please refer to my resume available in the portfolio."
+    },
+    {
+      "id": "resume",
+      "questions": [
+        "Can I see your resume?",
+        "Where is your CV?",
+        "Can I download your resume?",
+        "Do you have a resume?"
+      ],
+      "answer": "Yes. You can view or download my resume using the Resume buttons on the portfolio."
+    },
+    {
+      "id": "location",
+      "questions": [
+        "Where are you based?",
+        "Where do you live?",
+        "Which city are you from?",
+        "What is your location?"
+      ],
+      "answer": "I’m based in India. My professional experience includes work in Pune and Abu Dhabi."
+    },
+    {
+      "id": "education_learning",
+      "questions": [
+        "Do you like teaching?",
+        "Do you create educational content?",
+        "What is Hind Tech Academy?",
+        "Do you teach technology?"
+      ],
+      "answer": "Yes. Hind Tech Academy is the technology-learning and education vertical under Hind Tech Group, covering areas such as iOS, Python, Android, SQL, web development and programming fundamentals."
+    },
+    {
+      "id": "htg",
+      "questions": [
+        "What is Hind Tech Group?",
+        "Tell me about Hind Tech Group",
+        "What is HTG?",
+        "What is Hind Tech Group about?"
+      ],
+      "answer": "Hind Tech Group is the broader technology and product organization behind projects and initiatives such as Hind Tech Academy and software products."
+    },
+    {
+      "id": "portfolio",
+      "questions": [
+        "What is this website?",
+        "Tell me about this portfolio",
+        "What can I find on this website?",
+        "What is this portfolio for?"
+      ],
+      "answer": "This is my professional portfolio, presenting my experience, iOS skills, selected projects, technical writing, resume and ways to contact me."
+    },
+    {
+      "id": "portfolio_architecture",
+      "questions": [
+        "How is your portfolio built?",
+        "What technologies power this portfolio?",
+        "What stack does this website use?",
+        "How did you build this website?"
+      ],
+      "answer": "The portfolio is a lightweight web application built with HTML, CSS and JavaScript, organized around Models, View, View Controller and Helper layers, with GitHub Pages used for hosting."
+    },
+    {
+      "id": "blog",
+      "questions": [
+        "Do you write technical articles?",
+        "Do you have a blog?",
+        "What do you write about?",
+        "Can I read your technical articles?"
+      ],
+      "answer": "Yes. The portfolio includes technical articles covering iOS architecture, Swift concurrency, performance, SwiftUI, UIKit, networking, security, testing and interview topics."
+    },
+    {
+      "id": "open_source",
+      "questions": [
+        "Do you have open source projects?",
+        "Have you published Swift code?",
+        "Can I see your open source work?",
+        "Do you contribute to open source?"
+      ],
+      "answer": "Yes. My portfolio includes public Swift work, including the Reusable Swift Developer Toolkit."
+    },
+    {
+      "id": "work_style",
+      "questions": [
+        "What is your development approach?",
+        "How do you approach software development?",
+        "What is your engineering mindset?",
+        "How do you build software?"
+      ],
+      "answer": "I prefer practical engineering: understand the requirement, keep architecture maintainable, write reliable code, test important behavior and deliver a solution that works well in production."
+    },
+    {
+      "id": "teamwork",
+      "questions": [
+        "Can you work with a team?",
+        "Do you have team experience?",
+        "How do you work with developers?",
+        "Are you comfortable in a development team?"
+      ],
+      "answer": "Yes. My professional experience includes working in software teams and delivering production iOS applications. I value clear communication, ownership and maintainable shared code."
+    },
+    {
+      "id": "why_hire",
+      "questions": [
+        "Why should we hire you?",
+        "Why should we choose you?",
+        "What makes you a good iOS developer?",
+        "Why are you a good fit for an iOS role?"
+      ],
+      "answer": "I bring long-term native iOS experience, including 10+ years with Objective-C and 6+ years with Swift, combined with practical production engineering, architecture and problem-solving experience."
+    },
+    {
+      "id": "favorite_area",
+      "questions": [
+        "What part of iOS do you enjoy most?",
+        "What do you like about iOS development?",
+        "What is your favorite part of iOS?",
+        "What do you enjoy building?"
+      ],
+      "answer": "I enjoy building native iOS applications, solving engineering problems, improving architecture and turning product requirements into reliable user experiences."
+    },
+    {
+      "id": "future",
+      "questions": [
+        "What are you learning next?",
+        "What technologies do you want to learn?",
+        "What are your future goals?",
+        "What do you want to work on next?"
+      ],
+      "answer": "I’m interested in continuing to deepen modern iOS development while exploring practical software, automation and emerging technologies that can support real products."
+    },
+    {
+      "id": "thanks",
+      "questions": [
+        "Thank you",
+        "Thanks",
+        "Thank you for your help",
+        "Thanks for the information"
+      ],
+      "answer": "You’re welcome! If you want to know more about Ayaz, his iOS experience, projects or career, just ask."
+    }
+  ]
+}
