@@ -798,3 +798,244 @@ footer {
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   FINAL PREMIUM REFINEMENT — visual only
+   ========================================================================== */
+
+:root {
+  --premium-radius: 24px;
+  --premium-shadow: 0 24px 70px var(--shadow-color);
+}
+
+body {
+  letter-spacing: -0.01em;
+}
+
+nav {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.38) inset,
+    0 20px 60px var(--shadow-color) !important;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  filter: blur(2px);
+  transform: scale(1.04);
+}
+
+.hero h1 {
+  letter-spacing: -3.2px;
+  line-height: .98;
+}
+
+.hero h1 span {
+  text-shadow: 0 10px 34px var(--theme-brand-glow-soft);
+}
+
+.hero-description {
+  line-height: 1.75;
+}
+
+.buttons {
+  gap: 12px;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  font-weight: 750;
+  letter-spacing: -.2px;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.13) 50%, transparent 75%);
+  transform: translateX(-120%);
+  transition: transform .55s ease;
+  pointer-events: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+.btn-primary {
+  box-shadow:
+    0 12px 30px var(--theme-brand-glow-strong),
+    inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+
+.btn-secondary {
+  box-shadow:
+    0 10px 28px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+section:not(.hero) {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+section:not(.hero)::before {
+  opacity: .5;
+}
+
+.section-description {
+  max-width: 720px;
+  line-height: 1.75;
+}
+
+.card,
+.skill-group,
+.about-box,
+.project-panel,
+.blog-index-card,
+.article-nav-card,
+.related-card,
+.question,
+.toc,
+.link-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--premium-radius) !important;
+  box-shadow:
+    0 20px 60px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,.35) !important;
+}
+
+.card::before,
+.skill-group::before,
+.project-panel::before,
+.blog-index-card::before,
+.related-card::before,
+.question::before,
+.link-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--theme-brand-glow-strong), transparent);
+  opacity: .9;
+  pointer-events: none;
+}
+
+.card:hover,
+.skill-group:hover,
+.blog-index-card:hover,
+.link-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--line-strong) !important;
+  box-shadow:
+    0 28px 75px var(--shadow-color),
+    0 0 0 1px var(--theme-brand-glow-soft) !important;
+}
+
+.about {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow:
+    0 24px 70px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,.42);
+}
+
+.about::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: -220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--theme-brand-glow-soft), transparent 68%);
+  pointer-events: none;
+}
+
+.stat {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+.stat strong {
+  letter-spacing: -1.5px;
+}
+
+.skill {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 5px 16px var(--shadow-color);
+}
+
+.blog-search input,
+.contact-form input,
+.contact-form textarea {
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.blog-search input:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  transform: translateY(-1px);
+}
+
+.contact-form {
+  box-shadow:
+    0 24px 70px var(--shadow-color),
+    inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+footer {
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    letter-spacing: -2.4px;
+  }
+
+  section:not(.hero) {
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    letter-spacing: -1.8px;
+    line-height: 1.02;
+  }
+
+  section:not(.hero) {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .card:hover,
+  .skill-group:hover,
+  .blog-index-card:hover,
+  .link-card:hover {
+    transform: none;
+  }
+}
