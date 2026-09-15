@@ -515,6 +515,19 @@
   },
   "searchable": [
     {
+      "id": "projects",
+      "type": "section",
+      "title": "Projects",
+      "keywords": [
+        "projects",
+        "project",
+        "work",
+        "portfolio projects",
+        "ios projects"
+      ],
+      "target": "#projects"
+    },
+    {
       "id": "swift-toolkit",
       "type": "project",
       "title": "Reusable Swift Developer Toolkit",
