@@ -1,0 +1,1 @@
+const ChatbotAIAdapter=Object.freeze({enabled:false,async answer(){return null;}});
