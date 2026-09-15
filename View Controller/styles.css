@@ -33,3 +33,33 @@ section:not(.hero){content-visibility:auto;contain-intrinsic-size:800px}
 /* Performance-safe rendering: defer off-screen sections without changing the visual design. */
 section:not(.hero){content-visibility:auto;contain-intrinsic-size:720px}
 img{content-visibility:auto}
+
+/* Final global section-spacing correction */
+/* Keep the portfolio compact and content-focused across every section. */
+section:not(.hero) {
+  padding: 72px 0;
+}
+
+.hero {
+  min-height: 0;
+  padding: 88px 0 68px;
+}
+
+.section-description {
+  margin-bottom: 32px;
+}
+
+@media (max-width: 600px) {
+  section:not(.hero) {
+    padding: 60px 0;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: 65px 0 52px;
+  }
+
+  .section-description {
+    margin-bottom: 28px;
+  }
+}
