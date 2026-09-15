@@ -6,7 +6,7 @@ const PortfolioViewModel = {
             const links = document.createElement("div");
             links.id = "recruiterLinks";
             links.className = "recruiter-links";
-            links.innerHTML = `<a class="btn btn-secondary" href="${PortfolioModel.profile.linkedIn}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="btn btn-secondary" href="${PortfolioModel.profile.github}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span class="availability-badge" aria-label="${PortfolioModel.profile.availability}"><span aria-hidden="true"></span>${PortfolioModel.profile.availability}</span>`;
+            links.innerHTML = `<a class="btn btn-secondary" href="${PortfolioModel.profile.linkedIn}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="btn btn-secondary" href="${PortfolioModel.profile.github}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><div class="availability-feature" aria-label="${PortfolioModel.profile.availability}"><div class="availability-orb" aria-hidden="true"><span></span></div><div class="availability-copy"><span class="availability-label">AVAILABLE FOR NEW OPPORTUNITIES</span><strong>${PortfolioModel.profile.availability}</strong></div><div class="availability-mark" aria-hidden="true">⌁</div></div>`;
             heroButtons.appendChild(links);
         }
         document.querySelectorAll(".company-logo").forEach((image) => {
