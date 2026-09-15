@@ -636,6 +636,39 @@
         "jobs"
       ],
       "target": "#experience"
+    },
+    {
+      "id": "resume",
+      "type": "action",
+      "title": "Resume",
+      "keywords": [
+        "resume",
+        "cv",
+        "curriculum vitae"
+      ],
+      "target": "../Assets/Documents/Muhammed_Ayaz_Resume.pdf"
+    },
+    {
+      "id": "github",
+      "type": "action",
+      "title": "GitHub",
+      "keywords": [
+        "github",
+        "code",
+        "repositories",
+        "repository"
+      ],
+      "target": "https://github.com/Muhammedayaz77"
+    },
+    {
+      "id": "linkedin",
+      "type": "action",
+      "title": "LinkedIn",
+      "keywords": [
+        "linkedin",
+        "professional profile"
+      ],
+      "target": "https://www.linkedin.com/in/muhammedayaz/"
     }
   ]
 }
