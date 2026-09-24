@@ -42,8 +42,8 @@ for html_file in HTML_FILES:
             ERRORS.append(f"{html_file}: image missing alt text")
 
     if html_file.parent.name == "Blog" and html_file.name != "index.html":
-        has_shared_theme = 'src="../../View Controller/themeViewModel.js"' in text
-        has_shared_scroll = 'src="../../View Controller/scrollControlsViewModel.js"' in text
+        has_shared_theme = 'src="../View Controller/themeViewModel.js"' in text
+        has_shared_scroll = 'src="../View Controller/scrollControlsViewModel.js"' in text
         has_legacy_scroll = 'src="scroll-controls.js"' in text
         has_inline_theme = "function applyTheme(theme)" in text and "localStorage.getItem('portfolioTheme')" in text
         if not has_shared_theme and not has_inline_theme:
