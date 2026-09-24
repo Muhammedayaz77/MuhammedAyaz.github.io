@@ -82,7 +82,7 @@ const PortfolioViewModel = {
                 "@type": "Person",
                 name: PortfolioModel.profile.name,
                 jobTitle: PortfolioModel.profile.role,
-                url: "https://muhammedayaz77.github.io/MuhammedAyaz.github.io/",
+                url: "https://ayaz.hindtechgroup.co.in/",
                 image: seo.image,
                 sameAs: [PortfolioModel.profile.github, PortfolioModel.profile.linkedIn, "https://stackoverflow.com/users/1105403/muhammed-ayaz"],
                 knowsAbout: PortfolioModel.recruiterSkills
