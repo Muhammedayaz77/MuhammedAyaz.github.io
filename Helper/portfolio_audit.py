@@ -9,6 +9,9 @@ WARNINGS = []
 LOCAL_SCHEME_PREFIXES = ("http://", "https://", "mailto:", "javascript:", "#", "data:")
 
 for html_file in HTML_FILES:
+    # chatbot.html is an HTML fragment injected into the portfolio, not a standalone page.
+    if html_file.as_posix().endswith("View/Chatbot/chatbot.html"):
+        continue
     text = html_file.read_text(encoding="utf-8")
 
     if not re.search(r"<title>.*?</title>", text, re.I | re.S):
