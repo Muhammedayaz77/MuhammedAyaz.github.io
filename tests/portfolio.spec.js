@@ -4,12 +4,12 @@ const { AxeBuilder } = require("@axe-core/playwright");
 const homePath = "/View/home.html";
 const pages = [
   "/View/home.html",
-  "/View/Blog/designing-scalable-ios-architecture.html",
-  "/View/Blog/swift-concurrency.html",
-  "/View/Blog/ios-performance.html",
-  "/View/Blog/swiftui-real-world.html",
-  "/View/Blog/uikit-development-production.html",
-  "/View/Blog/ios-interview-questions-answers.html",
+  "/Blog/designing-scalable-ios-architecture.html",
+  "/Blog/swift-concurrency.html",
+  "/Blog/ios-performance.html",
+  "/Blog/swiftui-real-world.html",
+  "/Blog/uikit-development-production.html",
+  "/Blog/ios-interview-questions-answers.html",
   "/Projects/hind-pharma.html",
   "/Projects/swift-extension-toolkit.html"
 ];
@@ -57,7 +57,7 @@ test("core recruiter actions and contact configuration are correct", async ({ pa
   await expect(page.getByRole("link", { name: /LinkedIn/ })).toHaveAttribute("href", /linkedin\.com/);
   await expect(page.getByRole("link", { name: /GitHub/ }).first()).toHaveAttribute("href", /github\.com/);
   await expect(page.getByRole("link", { name: /Download Resume/ })).toHaveAttribute("href", /Muhammed_Ayaz_Resume\.pdf/);
-  await expect(page.locator(".availability-badge")).toBeVisible();
+  await expect(page.locator(".availability-feature")).toBeVisible();
   const model = await page.evaluate(async () => (await fetch("../Models/portfolioModel.js")).text());
   expect(model).toContain('email: "ayaz.job2010@gmail.com"');
 });
@@ -169,7 +169,7 @@ test("homepage does not load remote company logos", async ({ page }) => {
 
 
 test("every blog page theme toggle works without double-binding", async ({ page }) => {
-  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/"));
+  const blogPages = pages.filter((path) => path.startsWith("/Blog/"));
   for (const path of blogPages) {
     await page.goto(path, { waitUntil: "networkidle" });
     await page.evaluate(() => {
@@ -193,7 +193,7 @@ test("every blog page theme toggle works without double-binding", async ({ page 
 
 test("blog scroll-to-top control stays above browser toolbar area", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/View/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
+  await page.goto("/Blog/designing-scalable-ios-architecture.html", { waitUntil: "networkidle" });
   await page.evaluate(() => window.scrollTo(0, 900));
   const position = await page.locator(".scroll-button--top").evaluate((el) => {
     const rect = el.getBoundingClientRect();
@@ -218,7 +218,7 @@ test("blog article navigation returns to the portfolio blog section", async ({ p
 
 
 test("blog pages do not reference missing controller scripts", async ({ page }) => {
-  const blogPages = pages.filter((path) => path.startsWith("/View/Blog/"));
+  const blogPages = pages.filter((path) => path.startsWith("/Blog/"));
   for (const path of blogPages) {
     await page.goto(path, { waitUntil: "networkidle" });
     const missingScripts = await page.evaluate(() => [...document.scripts].map(s => s.src).filter(src => src.includes("blogViewController.js")));
