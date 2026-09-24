@@ -1,0 +1,15 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hindtech/public_html/ayaz/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp robots.txt $DEPLOYPATH
+    - /bin/cp sitemap.xml $DEPLOYPATH
+    - /bin/cp -R Assets $DEPLOYPATH
+    - /bin/cp -R Blog $DEPLOYPATH
+    - /bin/cp -R Helper $DEPLOYPATH
+    - /bin/cp -R Models $DEPLOYPATH
+    - /bin/cp -R Projects $DEPLOYPATH
+    - /bin/cp -R "View Controller" $DEPLOYPATH
+    - /bin/cp -R View $DEPLOYPATH
