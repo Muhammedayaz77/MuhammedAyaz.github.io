@@ -6,7 +6,7 @@ The portfolio is built as a lightweight, modular web application with a clear se
 
 ## Live Portfolio
 
-🌐 **Website:** https://muhammedayaz77.github.io/MuhammedAyaz.github.io/
+🌐 **Website:** https://ayaz.hindtechgroup.co.in/
 
 ## Repository
 
@@ -160,7 +160,7 @@ Run the project's configured tooling as needed during development.
 
 ## Deployment
 
-This repository is configured as a GitHub Pages-style personal portfolio repository. The public portfolio is available from the live website link above.
+This repository is configured for production deployment through cPanel Git Version Control. The public portfolio is available from the live website link above.
 
 ## Author
 
@@ -171,7 +171,7 @@ Software Developer focused on building practical software projects, with experie
 ### Links
 
 - GitHub: https://github.com/Muhammedayaz77
-- Portfolio: https://muhammedayaz77.github.io/MuhammedAyaz.github.io/
+- Portfolio: https://ayaz.hindtechgroup.co.in/
 
 ## License
 
