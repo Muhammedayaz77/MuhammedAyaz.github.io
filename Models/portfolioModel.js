@@ -35,6 +35,6 @@ const PortfolioModel = Object.freeze({
         title: "Muhammed Ayaz | Lead iOS Developer",
         description: "Lead iOS Developer with 12+ years of experience in Swift, SwiftUI, UIKit, Objective-C, architecture, performance and production software engineering.",
         keywords: "Muhammed Ayaz, Lead iOS Developer, Senior iOS Developer, Swift, SwiftUI, UIKit, Objective-C, MVVM, Clean Architecture, iOS Architecture, Python",
-        image: "https://muhammedayaz77.github.io/MuhammedAyaz.github.io/Assets/Images/AYAZ.jpeg"
+        image: "https://ayaz.hindtechgroup.co.in/Assets/Images/AYAZ.jpeg"
     }
 });
