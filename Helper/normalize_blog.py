@@ -2,10 +2,10 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-BLOG = ROOT / "View" / "Blog"
+BLOG = ROOT / "Blog"
 
-THEME_SCRIPT = '<script src="../../View Controller/themeViewModel.js"></script>'
-SCROLL_SCRIPT = '<script src="../../View Controller/scrollControlsViewModel.js"></script>'
+THEME_SCRIPT = '<script src="../View Controller/themeViewModel.js"></script>'
+SCROLL_SCRIPT = '<script src="../View Controller/scrollControlsViewModel.js"></script>'
 BLOG_SCRIPT = '<script src="blogViewController.js"></script>'
 BLOG_STYLE = '<link rel="stylesheet" href="blog.css">'
 
